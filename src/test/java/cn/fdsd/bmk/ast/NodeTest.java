@@ -20,7 +20,7 @@ class NodeTest {
         title2.appendChild(Link.builder().text("elearning").url("http://elearning.fudan.edu.cn").build());
         title.appendChild(title2);
 
-        title.accept(new PrinterTreeVisitor<>());
+        title.walk(new PrinterTreeVisitor<>());
 
     }
 }

@@ -12,5 +12,5 @@ import cn.fdsd.bmk.ast.node.Title;
  */
 public interface Visitor<N extends Node> extends NodeAdaptingVisitor<N> {
     void visit(Title title);
-    void visit(Link title);
+    void visit(Link link);
 }

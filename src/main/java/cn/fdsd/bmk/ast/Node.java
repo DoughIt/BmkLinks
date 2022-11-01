@@ -1,6 +1,5 @@
 package cn.fdsd.bmk.ast;
 
-import cn.fdsd.bmk.ast.visitor.GeneralVisitor;
 import cn.fdsd.bmk.ast.visitor.NodeAdaptedVisitor;
 import cn.fdsd.bmk.ast.visitor.Visitable;
 import lombok.Data;
@@ -17,7 +16,7 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode
 public abstract class Node implements Visitable, Serializable {
-    private static final int serializableId = -1;
+    private static final long serialVersionUID = 1L;
     protected String fullContent;   // add 命令后的文字
     private Node parent = null;
     private Node firstChild = null; // 第一个直接子节点
@@ -77,7 +76,35 @@ public abstract class Node implements Visitable, Serializable {
         this.prev = null;
     }
 
-    public void walk() {
-        this.accept(new GeneralVisitor<>());
+    /**
+     * 从当前节点开始遍历
+     *
+     * @param visitor
+     */
+    public void walk(NodeAdaptedVisitor<Node> visitor) {
+        this.accept(visitor);
+    }
+
+    public int getDepths() {
+        int depth = 0;
+        Node pNode = this.parent;
+        while (pNode != null) {
+            depth++;
+            pNode = pNode.getParent();
+        }
+        return depth;
+    }
+
+    public boolean hasNextSibling() {
+        return this.next != null;
+    }
+
+    /**
+     * 获取渲染后的文本
+     * @return
+     */
+    public String getRenderContent() {
+        // 默认不处理
+        return this.fullContent;
     }
 }

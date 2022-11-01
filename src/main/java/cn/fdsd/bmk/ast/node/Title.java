@@ -21,6 +21,11 @@ public class Title extends Node {
     private String text;    // 标题
 
     @Override
+    public String getRenderContent() {
+        return text;
+    }
+
+    @Override
     public <N extends Node> void accept(NodeAdaptedVisitor<N> nVisitor) {
         nVisitor.visit(this);
     }

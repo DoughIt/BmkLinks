@@ -19,6 +19,11 @@ public class Link extends Node {
     private String url;    // 链接
 
     @Override
+    public String getRenderContent() {
+        return url;
+    }
+
+    @Override
     public <N extends Node> void accept(NodeAdaptedVisitor<N> nVisitor) {
         nVisitor.visit(this);
     }
