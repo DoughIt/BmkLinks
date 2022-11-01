@@ -2,6 +2,8 @@ package cn.fdsd.bmk.ast.node;
 
 import cn.fdsd.bmk.ast.Node;
 import cn.fdsd.bmk.ast.visitor.NodeAdaptedVisitor;
+import cn.fdsd.bmk.domain.enums.RenderEnum;
+import cn.fdsd.bmk.utils.StringUtil;
 import lombok.*;
 
 /**
@@ -19,7 +21,10 @@ public class Link extends Node {
     private String url;    // 链接
 
     @Override
-    public String getRenderContent() {
+    public String getRenderContent(RenderEnum renderEnum) {
+        if (renderEnum == RenderEnum.MARKDOWN) {
+            return "[" + text + "](" + url + ")";
+        }
         return url;
     }
 

@@ -2,6 +2,7 @@ package cn.fdsd.bmk.ast;
 
 import cn.fdsd.bmk.ast.visitor.NodeAdaptedVisitor;
 import cn.fdsd.bmk.ast.visitor.Visitable;
+import cn.fdsd.bmk.domain.enums.RenderEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -103,7 +104,7 @@ public abstract class Node implements Visitable, Serializable {
      * 获取渲染后的文本
      * @return
      */
-    public String getRenderContent() {
+    public String getRenderContent(RenderEnum renderEnum) {
         // 默认不处理
         return this.fullContent;
     }

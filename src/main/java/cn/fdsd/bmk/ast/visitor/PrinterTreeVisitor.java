@@ -3,7 +3,7 @@ package cn.fdsd.bmk.ast.visitor;
 import cn.fdsd.bmk.ast.Node;
 import cn.fdsd.bmk.ast.node.Link;
 import cn.fdsd.bmk.ast.node.Title;
-import cn.fdsd.bmk.utils.PrinterTreeUtil;
+import cn.fdsd.bmk.utils.NodeUtil;
 
 /**
  * 打印 ls-tree 信息
@@ -15,13 +15,13 @@ public class PrinterTreeVisitor<N extends Node> extends NodeAdaptedVisitor<N> {
 
     @Override
     public void visit(Title node) {
-        System.out.println(PrinterTreeUtil.toTreeString(node));
+        System.out.println(NodeUtil.toTreeString(node));
         super.visit(node);
     }
 
     @Override
     public void visit(Link node) {
-        System.out.println(PrinterTreeUtil.toTreeString(node));
+        System.out.println(NodeUtil.toTreeString(node));
         super.visit(node);
     }
 }

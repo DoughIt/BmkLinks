@@ -3,8 +3,12 @@ package cn.fdsd.bmk.ast;
 
 import cn.fdsd.bmk.ast.node.Link;
 import cn.fdsd.bmk.ast.node.Title;
+import cn.fdsd.bmk.ast.visitor.OutputMdVisitor;
 import cn.fdsd.bmk.ast.visitor.PrinterTreeVisitor;
 import org.junit.jupiter.api.Test;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 
 class NodeTest {
     @Test
@@ -22,5 +26,12 @@ class NodeTest {
 
         title.walk(new PrinterTreeVisitor<>());
 
+        StringBuilder out = new StringBuilder();
+        title.walk(new OutputMdVisitor<>(out));
+        try (PrintWriter pw = new PrintWriter("./data.bmk")) {
+            pw.write(out.toString());
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
