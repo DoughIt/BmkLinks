@@ -9,9 +9,18 @@ import org.junit.jupiter.api.Test;
 class NodeTest {
     @Test
     void walk() {
-        Title node = Title.builder().text("h1").level(1).build();
-        node.appendChild(Link.builder().text("ehall").url("http://ehall.fudan.edu.cn").build());
-        node.appendChild(Link.builder().text("elearning").url("http://elearning.fudan.edu.cn").build());
-        node.accept(new PrinterTreeVisitor<>());
+        Title title = Title.builder().text("复旦").level(1).build();
+
+        Title title1 = Title.builder().text("复旦官网").level(2).build();
+        title1.appendChild(Link.builder().text("官网链接").url("http://fudan.edu.cn").build());
+        title.appendChild(title1);
+
+        Title title2 = Title.builder().text("复旦系统").level(2).build();
+        title2.appendChild(Link.builder().text("ehall").url("http://ehall.fudan.edu.cn").build());
+        title2.appendChild(Link.builder().text("elearning").url("http://elearning.fudan.edu.cn").build());
+        title.appendChild(title2);
+
+        title.accept(new PrinterTreeVisitor<>());
+
     }
 }

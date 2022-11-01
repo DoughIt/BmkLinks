@@ -13,11 +13,8 @@ public abstract class NodeAdaptedVisitor<N extends Node> implements Visitor<N> {
     private void visitChildren(final Node parent) {
         Node node = parent.getFirstChild();
         while (node != null) {
-            Node next = node.getNext();
-            if (next != null) {
-                next.accept(this);
-            }
-            node = next;
+            node.accept(this);
+            node = node.getNext();
         }
     }
 
