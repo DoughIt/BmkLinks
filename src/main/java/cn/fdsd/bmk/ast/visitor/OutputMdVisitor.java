@@ -5,10 +5,6 @@ import cn.fdsd.bmk.ast.node.Link;
 import cn.fdsd.bmk.ast.node.Title;
 import cn.fdsd.bmk.utils.NodeUtil;
 
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-
 /**
  * 输出到 bmk 文件
  *

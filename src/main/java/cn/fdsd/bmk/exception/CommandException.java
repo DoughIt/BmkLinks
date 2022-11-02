@@ -2,6 +2,7 @@ package cn.fdsd.bmk.exception;
 
 /**
  * 自定义异常
+ *
  * @author Jerry Zhang
  * create: 2022-11-02 10:58
  */

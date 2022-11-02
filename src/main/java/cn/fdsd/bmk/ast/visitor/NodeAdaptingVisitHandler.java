@@ -3,7 +3,6 @@ package cn.fdsd.bmk.ast.visitor;
 import cn.fdsd.bmk.ast.Node;
 
 /**
- *
  * @author Jerry Zhang
  * create: 2022-11-01 14:22
  */
@@ -25,14 +24,12 @@ public abstract class NodeAdaptingVisitHandler<N extends Node, A extends NodeAda
     }
 
 
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        NodeAdaptingVisitHandler<?,?> other = (NodeAdaptingVisitHandler<?,?>) o;
+        NodeAdaptingVisitHandler<?, ?> other = (NodeAdaptingVisitHandler<?, ?>) o;
 
         if (myClass != other.myClass) return false;
         return myAdapter == other.myAdapter;

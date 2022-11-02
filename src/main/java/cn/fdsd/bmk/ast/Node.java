@@ -108,6 +108,7 @@ public abstract class Node implements Visitable, Serializable {
 
     /**
      * 获取渲染后的文本
+     *
      * @return
      */
     public String getRenderContent(RenderEnum renderEnum) {
