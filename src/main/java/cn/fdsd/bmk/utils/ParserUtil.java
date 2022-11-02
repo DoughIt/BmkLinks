@@ -29,13 +29,14 @@ public class ParserUtil {
         Node root = null;
         try (BufferedReader br = new BufferedReader(new FileReader(bmkFile));) {
             String line;
-            Node parent = root;
+            Node parent = null;
             while ((line = br.readLine()) != null) {
                 Node node = null;
                 if (isTitle(line)) {
                     Matcher matcher = NodePattern.getInstance().matcher(NodeTypes.TITLE, line);
-                    if (matcher.find())
+                    if (matcher.find()) {
                         node = Title.builder().level(matcher.group(1).length()).text(matcher.group(2)).build();
+                    }
                 } else if (isLink(line)) {
                     Matcher matcher = NodePattern.getInstance().matcher(NodeTypes.LINK, line);
                     if (matcher.find())
@@ -43,18 +44,20 @@ public class ParserUtil {
                 }
                 if (node != null) {
                     node.setFullContent(line);
-                    if (node instanceof Title && parent instanceof Title) {
+                    if (node instanceof Title) {
                         while (parent != null && ((Title) parent).getLevel() > ((Title) node).getLevel()) {
                             parent = parent.getParent();
                         }
                         if (parent == null) {
                             root = node;
-                            parent = node;
-                        } else {
+                        } else if (((Title) parent).getLevel().equals(((Title) node).getLevel())) {
                             parent.insertAfter(node);
-                            parent = parent.getParent();
+                        } else {
+                            ((Title) node).setLevel(((Title) parent).getLevel() + 1);
+                            parent.appendChild(node);
                         }
-                    } else if (node instanceof Link) {
+                        parent = node;
+                    } else if (node instanceof Link && parent instanceof Title) {
                         parent.appendChild(node);
                     }
                 }

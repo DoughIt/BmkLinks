@@ -22,10 +22,6 @@ public class Title extends Node {
     private Integer level;  // 标题级别，可以不设置
     private String text;    // 标题
 
-    public Integer getLevel() {
-        return getDepths() + 1;
-    }
-
     @Override
     public String getRenderContent(RenderEnum renderEnum) {
         if (renderEnum == RenderEnum.MARKDOWN) {

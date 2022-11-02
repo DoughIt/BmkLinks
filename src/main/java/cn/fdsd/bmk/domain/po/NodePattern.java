@@ -26,7 +26,7 @@ public class NodePattern {
 
     private void initPatterns() {
         patternMap.put(NodeTypes.TITLE, Pattern.compile("^(#+)(.*)"));
-        patternMap.put(NodeTypes.LINK, Pattern.compile("/\\[([\\s\\S]*?)]\\(([\\s\\S]*?)\\)/g"));
+        patternMap.put(NodeTypes.LINK, Pattern.compile("\\[([\\s\\S]*?)]\\(([\\s\\S]*?)\\)"));
     }
 
     public static NodePattern getInstance() {

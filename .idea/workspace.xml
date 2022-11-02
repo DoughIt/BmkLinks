@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d615cc2f-0679-49b9-8636-3bfd96faa0df" name="Changes" comment="fix: 为啥会记录 idea 目录下的文件，明明已经 ignored 了😵‍💫">
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/utils/HintScanner.java" afterDir="false" />
+    <list default="true" id="d615cc2f-0679-49b9-8636-3bfd96faa0df" name="Changes" comment="feat: 使用装饰器模式扩展 Scanner 类；个性化输入提示。">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/core/BmkTerm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/core/BmkTerm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/domain/enums/CommandEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/domain/enums/CommandEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/ast/node/Title.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/ast/node/Title.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/domain/po/NodePattern.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/domain/po/NodePattern.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/utils/ParserUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/utils/ParserUtil.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -208,7 +208,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667396668324</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="feat: 使用装饰器模式扩展 Scanner 类；个性化输入提示。">
+      <created>1667400028887</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1667400028887</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -237,7 +244,8 @@
     <MESSAGE value="feat: 完善流程，导入/输出功能" />
     <MESSAGE value="fix: 为啥会记录 idea 目录下的文件，明明已经 ignored 了‍" />
     <MESSAGE value="fix: 为啥会记录 idea 目录下的文件，明明已经 ignored 了‍" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: 为啥会记录 idea 目录下的文件，明明已经 ignored 了‍" />
+    <MESSAGE value="feat: 使用装饰器模式扩展 Scanner 类；个性化输入提示。" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 使用装饰器模式扩展 Scanner 类；个性化输入提示。" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -259,28 +267,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/utils/ParserUtil.java</url>
-          <line>62</line>
+          <line>66</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/domain/po/Bookmark.java</url>
-          <line>33</line>
-          <option name="timeStamp" value="27" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/utils/ParserUtil.java</url>
-          <line>64</line>
+          <line>68</line>
           <option name="timeStamp" value="29" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/utils/ParserUtil.java</url>
-          <line>38</line>
-          <option name="timeStamp" value="34" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/utils/ParserUtil.java</url>
-          <line>34</line>
-          <option name="timeStamp" value="35" />
+          <url>file://$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/ast/Node.java</url>
+          <line>56</line>
+          <option name="timeStamp" value="42" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
