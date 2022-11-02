@@ -9,7 +9,7 @@ import cn.fdsd.bmk.core.cmd.DelCommand;
  */
 public class UndoableDelCommand extends UndoableCommand {
 
-    UndoableDelCommand(DelCommand command) {
+    public UndoableDelCommand(DelCommand command) {
         super(command);
     }
 

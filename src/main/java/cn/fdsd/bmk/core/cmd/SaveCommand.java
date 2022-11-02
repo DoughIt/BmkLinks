@@ -1,5 +1,7 @@
 package cn.fdsd.bmk.core.cmd;
 
+import cn.fdsd.bmk.domain.enums.CommandEnum;
+
 /**
  *
  * @author Jerry Zhang
@@ -8,6 +10,8 @@ package cn.fdsd.bmk.core.cmd;
 public class SaveCommand extends GeneralCommand{
     @Override
     public void execute() {
-
+        if (po.getName().equals(CommandEnum.SAVE)) {
+            bookmark.save();
+        }
     }
 }

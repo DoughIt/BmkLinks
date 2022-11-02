@@ -1,5 +1,7 @@
 package cn.fdsd.bmk.domain.enums;
 
+import lombok.Data;
+
 /**
  *
  * @author Jerry Zhang
@@ -22,13 +24,31 @@ public enum CommandEnum {
     UNDO("undo", null),     // undo 功能
     REDO("redo", null),     // redo 功能
     SHOW("show", null),
-    SHOW_TREE("show_tree", SHOW),   // 可视化当前编辑内容
-    LS_TREE("ls_tree", SHOW);   // 可视化当前目录结构
+    SHOW_TREE("show-tree", SHOW),   // 可视化当前编辑内容
+    LS_TREE("ls-tree", SHOW);   // 可视化当前目录结构
 
     private String name;
     private CommandEnum parent;
+
+    public String getName(){
+        return this.name;
+    }
+
+    public CommandEnum getParent() {
+        return this.parent;
+    }
+
     CommandEnum(String name, CommandEnum parent){
         this.name = name;
         this.parent = parent;
+    }
+
+    public static CommandEnum parseToEnum(String name) {
+        for (CommandEnum commandEnum: values()) {
+            if (commandEnum.getName().equals(name)) {
+                return commandEnum;
+            }
+        }
+        return null;
     }
 }

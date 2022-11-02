@@ -7,4 +7,8 @@ package cn.fdsd.bmk.domain.po;
  */
 public class History {
     // todo
+
+    public void save() {
+
+    }
 }

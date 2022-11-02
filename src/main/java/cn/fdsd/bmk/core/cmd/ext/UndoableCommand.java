@@ -2,7 +2,6 @@ package cn.fdsd.bmk.core.cmd.ext;
 
 import cn.fdsd.bmk.core.cmd.Command;
 import cn.fdsd.bmk.core.cmd.GeneralCommand;
-import cn.fdsd.bmk.core.cmd.Undoable;
 import cn.fdsd.bmk.exception.CommandErrorCode;
 import cn.fdsd.bmk.exception.CommandException;
 import lombok.*;

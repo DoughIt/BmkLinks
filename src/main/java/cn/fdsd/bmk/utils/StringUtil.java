@@ -12,4 +12,12 @@ public class StringUtil {
     public static String repeatStr(String seed, int n) {
         return String.join("", Collections.nCopies(n, seed));
     }
+
+    public static Boolean isEmpty(String text) {
+        return text == null || text.trim().isEmpty();
+    }
+
+    public static Boolean isBmkFile(String filePath) {
+        return !isEmpty(filePath) && filePath.endsWith(".bmk");
+    }
 }

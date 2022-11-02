@@ -1,5 +1,6 @@
 package cn.fdsd.bmk.core.cmd;
 
+
 /**
  *
  * @author Jerry Zhang
@@ -8,6 +9,15 @@ package cn.fdsd.bmk.core.cmd;
 public class ShowCommand extends GeneralCommand{
     @Override
     public void execute() {
-
+        switch (po.getName()) {
+            case SHOW_TREE:
+                // todo
+                break;
+            case LS_TREE:
+                bookmark.lsTree();
+                break;
+            default:
+                break;
+        }
     }
 }

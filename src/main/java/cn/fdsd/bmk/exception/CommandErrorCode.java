@@ -6,8 +6,13 @@ package cn.fdsd.bmk.exception;
  * create: 2022-11-02 11:00
  */
 public enum CommandErrorCode implements ErrorCode{
-    CANNOT_UNDO(1001, "不支持 undo 操作"),
-    CANNOT_REDO(1002, "不支持 redo 操作");
+    NOT_BMK(1000, "不支持读取非 bmk 格式的文件"),
+    EMPTY(1001, "工作区为空"),
+    SAVE_FAILED(1002, "持久化失败"),
+    PARSE_FAILED(1003, "解析失败"),
+    CANNOT_UNDO(1004, "不支持 undo 操作"),
+    CANNOT_REDO(1005, "不支持 redo 操作"),
+    NOT_SUPPORT(1006, "暂不支持该操作");
 
     private long code;
     private String message;

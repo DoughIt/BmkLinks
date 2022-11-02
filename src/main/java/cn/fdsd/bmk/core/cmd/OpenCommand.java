@@ -1,5 +1,7 @@
 package cn.fdsd.bmk.core.cmd;
 
+import cn.fdsd.bmk.ast.visitor.PrinterTreeVisitor;
+
 /**
  *
  * @author Jerry Zhang
@@ -8,6 +10,15 @@ package cn.fdsd.bmk.core.cmd;
 public class OpenCommand extends GeneralCommand{
     @Override
     public void execute() {
-
+        switch (po.getName()) {
+            case OPEN:
+                bookmark.init();
+                break;
+            case EDIT:
+                bookmark.lsTree();
+                break;
+            default:
+                break;
+        }
     }
 }

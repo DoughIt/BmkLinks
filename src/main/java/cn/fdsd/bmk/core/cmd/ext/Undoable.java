@@ -1,4 +1,4 @@
-package cn.fdsd.bmk.core.cmd;
+package cn.fdsd.bmk.core.cmd.ext;
 
 /**
  * 需要实现 undo / redo 功能
