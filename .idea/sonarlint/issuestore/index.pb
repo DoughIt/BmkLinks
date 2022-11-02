@@ -1,0 +1,25 @@
+
+9
+	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+n
+>src/main/java/cn/fdsd/bmk/ast/visitor/NodeAdaptingVisitor.java,c/e/ce10a8b49f771f5f2a032204f8eda9c277c8d533
+m
+=src/main/java/cn/fdsd/bmk/ast/visitor/NodeAdaptedVisitor.java,4/e/4eabbcac3c38fef2690f065b12c6b3b6db5e7622
+i
+9src/main/java/cn/fdsd/bmk/ast/visitor/GeneralVisitor.java,b/8/b8687c5c01b80029c072b8edaf4bd6ad9f61c1c4
+j
+:src/main/java/cn/fdsd/bmk/ast/visitor/OutputMdVisitor.java,2/7/27e61eb5fe80953fb3b17cd72649bc66cfcc9731
+m
+=src/main/java/cn/fdsd/bmk/ast/visitor/PrinterTreeVisitor.java,9/2/921c150a6339b47a2b7ec112d54e85da0c29388c
+\
+,src/main/java/cn/fdsd/bmk/ast/node/Link.java,2/8/289e0f48a46facbebfe410c44f9925ea8a9a1058
+]
+-src/main/java/cn/fdsd/bmk/ast/node/Title.java,a/a/aaa808122c97973c24c17b978b53eb135030f0bc
+[
++src/test/java/cn/fdsd/bmk/ast/NodeTest.java,b/7/b764c68da56c67f94554025ca5d42d547e840181
+[
++src/main/java/cn/fdsd/bmk/core/BmkTerm.java,7/2/727ac979b3b955a90ed0805fd509c185cc5b2d8f
+f
+6src/main/java/cn/fdsd/bmk/domain/enums/TreeSymbol.java,2/1/21c96569d84ad7551f6c0f55907a2b9cdccf06e7
+`
+0src/main/java/cn/fdsd/bmk/domain/po/History.java,3/d/3d0c54a6d7f9bcd44d898cb95358a8f0f8da00b4

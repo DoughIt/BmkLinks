@@ -18,12 +18,18 @@ import java.io.Serializable;
 @EqualsAndHashCode
 public abstract class Node implements Visitable, Serializable {
     private static final long serialVersionUID = 1L;
-    protected String fullContent;   // add 命令后的文字
+    private String fullContent;   // add 命令后的文字
     private Node parent = null;
     private Node firstChild = null; // 第一个直接子节点
     private Node lastChild = null;  // 最后一个子节点
     private Node prev = null;       // 上一个兄弟节点
     private Node next = null;       // 下一个兄弟节点
+
+    private Boolean selected;       // 是否选中
+
+    private Boolean accessed;       // 是否访问过
+
+    private int accesses;           // 访问次数
 
     /**
      * 插入一个子节点到末尾

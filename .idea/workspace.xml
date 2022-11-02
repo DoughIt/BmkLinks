@@ -4,32 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d615cc2f-0679-49b9-8636-3bfd96faa0df" name="Changes" comment="feat: 渲染显示树状结构">
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/ast/visitor/OutputMdVisitor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/core/BmkTerm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/core/cmd/AddCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/core/cmd/Command.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/core/cmd/DelCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/core/cmd/EditCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/core/cmd/ReadCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/core/cmd/RedoCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/core/cmd/SaveCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/core/cmd/ShowCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/core/cmd/UndoCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/core/cmd/factory/CommandFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/core/cmd/factory/CommandInvoker.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/domain/enums/RenderEnum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/domain/po/Bookmark.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/domain/po/History.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/utils/ParserUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/utils/StringUtil.java" afterDir="false" />
+    <list default="true" id="d615cc2f-0679-49b9-8636-3bfd96faa0df" name="Changes" comment="feat: 初步搭建命令模式">
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/core/cmd/GeneralCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/core/cmd/Undoable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/core/cmd/UndoableAddCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/core/cmd/UndoableCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/core/cmd/UndoableDelCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/domain/enums/CommandEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/domain/po/CommandPo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/exception/CommandErrorCode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/exception/CommandException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/exception/ErrorCode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/ast/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/ast/Node.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/ast/node/Link.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/ast/node/Link.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/ast/node/Title.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/ast/node/Title.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/ast/visitor/PrinterTreeVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/ast/visitor/PrinterTreeVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/utils/PrinterTreeUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/utils/NodeUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/cn/fdsd/bmk/ast/NodeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/cn/fdsd/bmk/ast/NodeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/core/cmd/AddCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/core/cmd/AddCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/core/cmd/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/core/cmd/Command.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/core/cmd/DelCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/core/cmd/DelCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/core/cmd/EditCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/core/cmd/OpenCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/core/cmd/ReadCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/core/cmd/RedoCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/core/cmd/SaveCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/core/cmd/SaveCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/core/cmd/ShowCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/core/cmd/ShowCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/core/cmd/UndoCommand.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,8 +36,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="JUnit5 Test Class" />
+        <option value="Interface" />
         <option value="Enum" />
         <option value="Class" />
       </list>
@@ -83,8 +80,9 @@
       <recent name="cn.fdsd.bmk.ast" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="cn.fdsd.bmk.ast.visitor" />
       <recent name="cn.fdsd.bmk.core.cmd" />
+      <recent name="cn.fdsd.bmk.exception" />
+      <recent name="cn.fdsd.bmk.ast.visitor" />
     </key>
   </component>
   <component name="RunManager">
@@ -161,7 +159,21 @@
       <option name="project" value="LOCAL" />
       <updated>1667302661605</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="feat: 新增 visitor 规则，渲染 markdown 效果">
+      <created>1667306793610</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1667306793610</updated>
+    </task>
+    <task id="LOCAL-00008" summary="feat: 初步搭建命令模式">
+      <created>1667306828490</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1667306828490</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -181,6 +193,8 @@
     <MESSAGE value="add README.md" />
     <MESSAGE value="feat: 构建书签结构信息，使用访问者模式遍历节点" />
     <MESSAGE value="feat: 渲染显示树状结构" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: 渲染显示树状结构" />
+    <MESSAGE value="feat: 新增 visitor 规则，渲染 markdown 效果" />
+    <MESSAGE value="feat: 初步搭建命令模式" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 初步搭建命令模式" />
   </component>
 </project>
