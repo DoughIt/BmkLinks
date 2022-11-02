@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
  */
 public class ParserUtil {
     public static Node parseBmk(String bmkFile) {
-        if (!StringUtil.isBmkFile(bmkFile)) {
+        if (!Boolean.TRUE.equals(StringUtil.isBmkFile(bmkFile))) {
             throw new CommandException(CommandErrorCode.NOT_BMK);
         }
         Node root = null;
@@ -57,7 +57,7 @@ public class ParserUtil {
                             parent.appendChild(node);
                         }
                         parent = node;
-                    } else if (node instanceof Link && parent instanceof Title) {
+                    } else if (parent != null) {
                         parent.appendChild(node);
                     }
                 }
@@ -74,7 +74,6 @@ public class ParserUtil {
     }
 
     private static boolean isLink(String line) {
-        // todo 匹配不准
         return !StringUtil.isEmpty(line) && NodePattern.getInstance().matches(NodeTypes.LINK, line);
     }
 
@@ -82,15 +81,22 @@ public class ParserUtil {
         if (Boolean.TRUE.equals(StringUtil.isEmpty(line))) {
             throw new CommandException(CommandErrorCode.PARSE_FAILED);
         }
-        Pattern pattern = Pattern.compile("(\\S*)\\s+(.*)\\s+(at)?\\s+(\\S*)");
-        Matcher matcher = pattern.matcher(line);
-        // todo 正则不对，匹配不准
+        Pattern atPattern = Pattern.compile("\\s*(at)\\s*");
+        Matcher atMatcher = atPattern.matcher(line);
+        String leftCmd = line;
+        String atOption = null;
+        if (atMatcher.find()) {
+            leftCmd = line.substring(0, line.indexOf(" at "));
+            atOption = line.substring(line.indexOf(" at ") + 4).trim();
+        }
+        Pattern pattern = Pattern.compile("(\\S*)(\\s+(\\S*))?");
+        Matcher matcher = pattern.matcher(leftCmd);
         if (matcher.find()) {
             CommandEnum commandEnum = CommandEnum.parseToEnum(matcher.group(1));
             return CommandPo.builder()
                     .name(commandEnum)
-                    .args(matcher.groupCount() >= 2 ? new String[]{matcher.group(2)} : null)
-                    .atOption(matcher.groupCount() >= 4 ? matcher.group(4) : null).build();
+                    .args(matcher.groupCount() >= 3 ? new String[]{matcher.group(3)} : null)
+                    .atOption(atOption).build();
         }
         return null;
     }

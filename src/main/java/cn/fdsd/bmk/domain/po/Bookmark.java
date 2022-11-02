@@ -36,7 +36,9 @@ public class Bookmark {
 
     public void lsTree() {
         if (this.root != null) {
-            this.root.walk(new PrinterTreeVisitor<>());
+            StringBuilder out = new StringBuilder();
+            this.root.walk(new PrinterTreeVisitor<>(out));
+            System.out.println(out);
         }
     }
 

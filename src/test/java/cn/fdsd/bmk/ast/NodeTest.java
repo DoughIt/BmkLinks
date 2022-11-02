@@ -12,7 +12,7 @@ import java.io.PrintWriter;
 
 class NodeTest {
     @Test
-    void walk() {
+    void testWalk() {
         Title title = Title.builder().text("复旦").level(1).build();
 
         Title title1 = Title.builder().text("复旦官网").level(2).build();
@@ -24,12 +24,14 @@ class NodeTest {
         title2.appendChild(Link.builder().text("elearning").url("http://elearning.fudan.edu.cn").build());
         title.appendChild(title2);
 
-        title.walk(new PrinterTreeVisitor<>());
+        StringBuilder out1 = new StringBuilder();
+        title.walk(new PrinterTreeVisitor<>(out1));
+        System.out.println(out1);
 
-        StringBuilder out = new StringBuilder();
-        title.walk(new OutputMdVisitor<>(out));
+        StringBuilder out2 = new StringBuilder();
+        title.walk(new OutputMdVisitor<>(out2));
         try (PrintWriter pw = new PrintWriter("./data.bmk")) {
-            pw.write(out.toString());
+            pw.write(out2.toString());
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

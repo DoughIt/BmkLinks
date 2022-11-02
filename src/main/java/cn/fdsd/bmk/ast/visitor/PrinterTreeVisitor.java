@@ -12,16 +12,21 @@ import cn.fdsd.bmk.utils.NodeUtil;
  * create: 2022-11-01 16:08
  */
 public class PrinterTreeVisitor<N extends Node> extends NodeAdaptedVisitor<N> {
+    private final StringBuilder out;
+
+    public PrinterTreeVisitor(StringBuilder out) {
+        this.out = out;
+    }
 
     @Override
     public void visit(Title node) {
-        System.out.println(NodeUtil.toTreeString(node));
+        out.append(NodeUtil.toTreeString(node)).append("\n");
         super.visit(node);
     }
 
     @Override
     public void visit(Link node) {
-        System.out.println(NodeUtil.toTreeString(node));
+        out.append(NodeUtil.toTreeString(node)).append("\n");
         super.visit(node);
     }
 }
