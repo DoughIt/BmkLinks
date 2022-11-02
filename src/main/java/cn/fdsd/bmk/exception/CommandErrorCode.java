@@ -2,10 +2,11 @@ package cn.fdsd.bmk.exception;
 
 /**
  * 定义各类返回码的值
+ *
  * @author Jerry Zhang
  * create: 2022-11-02 11:00
  */
-public enum CommandErrorCode implements ErrorCode{
+public enum CommandErrorCode implements ErrorCode {
     NOT_BMK(1000, "不支持读取非 bmk 格式的文件"),
     EMPTY(1001, "工作区为空"),
     SAVE_FAILED(1002, "持久化失败"),
@@ -17,7 +18,7 @@ public enum CommandErrorCode implements ErrorCode{
     private long code;
     private String message;
 
-    private CommandErrorCode(long code, String message){
+    private CommandErrorCode(long code, String message) {
         this.code = code;
         this.message = message;
     }

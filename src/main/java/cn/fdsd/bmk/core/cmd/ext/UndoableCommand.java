@@ -4,11 +4,13 @@ import cn.fdsd.bmk.core.cmd.Command;
 import cn.fdsd.bmk.core.cmd.GeneralCommand;
 import cn.fdsd.bmk.exception.CommandErrorCode;
 import cn.fdsd.bmk.exception.CommandException;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 
 /**
  * 装饰器模式实现功能扩展
+ *
  * @author Jerry Zhang
  * create: 2022-11-02 11:02
  */

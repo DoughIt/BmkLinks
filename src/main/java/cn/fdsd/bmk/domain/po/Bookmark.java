@@ -39,13 +39,14 @@ public class Bookmark {
             this.root.walk(new PrinterTreeVisitor<>());
         }
     }
+
     public void save(String path) {
         this.path = path;
         save();
     }
 
     public void save() {
-        if (this.root == null){
+        if (this.root == null) {
             throw new CommandException(CommandErrorCode.EMPTY);
         }
         StringBuilder out = new StringBuilder();

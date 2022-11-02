@@ -16,6 +16,7 @@ public enum TreeSymbol {
     public String getSymbol() {
         return this.symbol;
     }
+
     TreeSymbol(String symbol) {
         this.symbol = symbol;
     }
