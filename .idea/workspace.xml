@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d615cc2f-0679-49b9-8636-3bfd96faa0df" name="Changes" comment="feat: 完善流程，导入/输出功能">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="d615cc2f-0679-49b9-8636-3bfd96faa0df" name="Changes" comment="fix: 为啥会记录 idea 目录下的文件，明明已经 ignored 了😵‍💫">
+      <change afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/utils/HintScanner.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/core/BmkTerm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/core/BmkTerm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/domain/enums/CommandEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/fdsd/bmk/domain/enums/CommandEnum.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +72,7 @@
       <recent name="cn.fdsd.bmk.ast.visitor" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.NodeTest.walk">
+  <component name="RunManager" selected="Application.BmkTerm">
     <configuration name="BmkTerm" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="cn.fdsd.bmk.core.BmkTerm" />
       <module name="BmkLinks" />
@@ -107,8 +109,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.NodeTest.walk" />
         <item itemvalue="Application.BmkTerm" />
+        <item itemvalue="JUnit.NodeTest.walk" />
       </list>
     </recent_temporary>
   </component>
@@ -192,7 +194,21 @@
       <option name="project" value="LOCAL" />
       <updated>1667379065842</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="fix: 为啥会记录 idea 目录下的文件，明明已经 ignored 了">
+      <created>1667396539239</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1667396539239</updated>
+    </task>
+    <task id="LOCAL-00012" summary="fix: 为啥会记录 idea 目录下的文件，明明已经 ignored 了">
+      <created>1667396668324</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1667396668324</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -219,7 +235,9 @@
     <MESSAGE value="feat: 初步搭建命令模式" />
     <MESSAGE value="feat: 使用装饰器模式扩展实现 redo/undo功能&#10;todo: 具体操作步骤" />
     <MESSAGE value="feat: 完善流程，导入/输出功能" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: 完善流程，导入/输出功能" />
+    <MESSAGE value="fix: 为啥会记录 idea 目录下的文件，明明已经 ignored 了‍" />
+    <MESSAGE value="fix: 为啥会记录 idea 目录下的文件，明明已经 ignored 了‍" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: 为啥会记录 idea 目录下的文件，明明已经 ignored 了‍" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
