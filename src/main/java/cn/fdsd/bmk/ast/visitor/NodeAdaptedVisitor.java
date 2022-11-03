@@ -20,6 +20,9 @@ public abstract class NodeAdaptedVisitor<N extends Node> implements Visitor<N> {
 
     public void visit(final Title node) {
         visitChildren(node);
+        if (node.getParent() == null && node.getNext() != null) {
+            node.getNext().accept(this);
+        }
     }
 
     public void visit(final Link node) {

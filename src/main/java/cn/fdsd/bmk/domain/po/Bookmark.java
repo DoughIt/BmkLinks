@@ -67,7 +67,11 @@ public class Bookmark {
         at = StringUtil.removeQuotationMarks(at);
         if (!Boolean.TRUE.equals(StringUtil.isEmpty(at))) {
             // 放在 at 级目录下
-            this.root.appendChildInNameNode(at, Title.class, title);
+            Node parent = this.root;
+            while (parent != null) {
+                parent.appendChildInNameNode(at, Title.class, title);
+                parent = parent.getNext();
+            }
         } else {
             // title 默认放在 root 目录同级
             this.root.insertAfter(title);
@@ -78,7 +82,11 @@ public class Bookmark {
         at = StringUtil.removeQuotationMarks(at);
         if (!Boolean.TRUE.equals(StringUtil.isEmpty(at))) {
             // 放在 at 级目录下
-            this.root.appendChildInNameNode(at, Title.class, link);
+            Node parent = this.root;
+            while (parent != null) {
+                parent.appendChildInNameNode(at, Title.class, link);
+                parent = parent.getNext();
+            }
         } else {
             // link 默认放在 root 目录下
             this.root.appendChild(link);

@@ -62,6 +62,10 @@ public abstract class Node implements Visitable, Serializable {
      * @param child
      */
     public void appendChildInNameNode(String name, Class<? extends Node> nameType, Node child) {
+        if (getName() != null && getName().equals(name) &&
+                nameType.isInstance(this) && !getUuid().equals(child.getUuid())) {
+            appendChild(child);
+        }
         for (Node node : getChildren()) {
             // 检查 uuid 是否相同，避免新插入节点的 name 与 name 相同时进入无限循环
             if (node.getName() != null && node.getName().equals(name) &&
@@ -100,6 +104,10 @@ public abstract class Node implements Visitable, Serializable {
      * @param sibling
      */
     public void insertAfterInNameNode(String name, Class<? extends Node> nameType, Node sibling) {
+        if (getName() != null && getName().equals(name) &&
+                nameType.isInstance(this) && !getUuid().equals(sibling.getUuid())) {
+            insertAfter(sibling);
+        }
         for (Node node : getChildren()) {
             // 检查 uuid 是否相同，避免新插入节点的 name 与 name 相同时进入无限循环
             if (node.getName() != null && node.getName().equals(name) &&

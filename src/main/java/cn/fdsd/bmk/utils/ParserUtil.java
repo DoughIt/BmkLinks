@@ -40,12 +40,12 @@ public class ParserUtil {
                 if (isTitle(line)) {
                     Matcher matcher = NodePattern.getInstance().matcher(NodeTypes.TITLE, line);
                     if (matcher.find()) {
-                        node = Title.builder().level(matcher.group(1).length()).text(matcher.group(2)).build();
+                        node = Title.builder().level(matcher.group(1).trim().length()).text(matcher.group(2).trim()).build();
                     }
                 } else if (isLink(line)) {
                     Matcher matcher = NodePattern.getInstance().matcher(NodeTypes.LINK, line);
                     if (matcher.find())
-                        node = Link.builder().text(matcher.group(1)).url(matcher.group(2)).build();
+                        node = Link.builder().text(matcher.group(1).trim()).url(matcher.group(2).trim()).build();
                 }
                 if (node != null) {
                     node.setFullContent(line);
@@ -115,6 +115,7 @@ public class ParserUtil {
         if (matcher.find()) {
             CommandEnum commandEnum = CommandEnum.parseToEnum(matcher.group(1));
             return CommandPo.builder()
+                    .fullCmd(line)
                     .name(commandEnum)
                     .args(matcher.groupCount() >= 3 ? new String[]{matcher.group(3)} : null)
                     .atOption(atOption).build();
@@ -131,7 +132,7 @@ public class ParserUtil {
         if (Boolean.TRUE.equals(StringUtil.isEmpty(text))) {
             throw new CommandException(CommandErrorCode.PARSE_FAILED);
         }
-        return Title.builder().text(StringUtil.removeQuotationMarks(text)).build();
+        return Title.builder().text(StringUtil.removeQuotationMarks(text.trim())).build();
     }
 
     /**
@@ -144,8 +145,8 @@ public class ParserUtil {
             throw new CommandException(CommandErrorCode.PARSE_FAILED);
         }
         String[] temps = text.split("@");
-        return Link.builder().text(StringUtil.removeQuotationMarks(temps[0]))
-                .url(StringUtil.removeQuotationMarks(temps[1])).build();
+        return Link.builder().text(StringUtil.removeQuotationMarks(temps[0].trim()))
+                .url(StringUtil.removeQuotationMarks(temps[1].trim())).build();
     }
 
 }

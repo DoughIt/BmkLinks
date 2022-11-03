@@ -11,6 +11,7 @@ import lombok.Data;
 @Data
 @Builder
 public class CommandPo {
+    private String fullCmd;
     private CommandEnum name;
     private String[] args;
     private String atOption;

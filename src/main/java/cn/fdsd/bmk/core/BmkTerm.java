@@ -26,10 +26,13 @@ public class BmkTerm {
         try (HintScanner scanner = new HintScanner(System.in)) {
             String cmd;
             while ((cmd = scanner.nextLine(HINT, false)) != null) {
-                invoker.execute(bookmark, ParserUtil.parseCommand(cmd));
+                try {
+                    invoker.execute(bookmark, ParserUtil.parseCommand(cmd));
+                } catch (CommandException ex) {
+                    // 继续监听
+                    System.out.printf("%s", ex.getErrorCode().getMessage());
+                }
             }
-        } catch (CommandException ex) {
-            System.out.printf("%s", ex.getErrorCode().getMessage());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -34,11 +34,28 @@ public class Title extends Node {
 
     /**
      * name 字段用于查询
+     *
      * @return
      */
     @Override
     public String getName() {
         return text;
+    }
+
+    @Override
+    public void appendChild(Node child) {
+        super.appendChild(child);
+        if (child instanceof Title) {
+            ((Title) child).setLevel(child.getDepths() + 1);
+        }
+    }
+
+    @Override
+    public void insertAfter(Node sibling) {
+        super.insertAfter(sibling);
+        if (sibling instanceof Title) {
+            ((Title) sibling).setLevel(sibling.getDepths() + 1);
+        }
     }
 
     @Override
