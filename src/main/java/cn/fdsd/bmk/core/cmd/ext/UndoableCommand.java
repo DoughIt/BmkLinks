@@ -2,6 +2,8 @@ package cn.fdsd.bmk.core.cmd.ext;
 
 import cn.fdsd.bmk.core.cmd.Command;
 import cn.fdsd.bmk.core.cmd.GeneralCommand;
+import cn.fdsd.bmk.domain.po.Bookmark;
+import cn.fdsd.bmk.domain.po.CommandPo;
 import cn.fdsd.bmk.exception.CommandErrorCode;
 import cn.fdsd.bmk.exception.CommandException;
 import lombok.Data;
@@ -17,12 +19,24 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public abstract class UndoableCommand extends GeneralCommand implements Undoable {
-    private Command command;
+    private GeneralCommand command;
 
     protected boolean canUndo;
 
-    public UndoableCommand(Command command) {
+    public UndoableCommand(GeneralCommand command) {
         this.command = command;
+    }
+
+    @Override
+    public void setBookmark(Bookmark bookmark) {
+        super.setBookmark(bookmark);
+        this.command.setBookmark(bookmark);
+    }
+
+    @Override
+    public void setPo(CommandPo po) {
+        super.setPo(po);
+        this.command.setPo(po);
     }
 
     public boolean canUndo() {
@@ -37,6 +51,9 @@ public abstract class UndoableCommand extends GeneralCommand implements Undoable
         command.execute();
     }
 
+    /**
+     * 恢复
+     */
     protected abstract void restore();
 
     public void execute() {

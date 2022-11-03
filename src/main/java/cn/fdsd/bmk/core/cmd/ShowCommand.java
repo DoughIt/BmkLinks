@@ -10,7 +10,7 @@ public class ShowCommand extends GeneralCommand {
     public void execute() {
         switch (po.getName()) {
             case SHOW_TREE:
-                // todo
+                // todo 不太理解与 ls-tree 区别
                 break;
             case LS_TREE:
                 bookmark.lsTree();

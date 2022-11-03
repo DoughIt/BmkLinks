@@ -10,11 +10,10 @@ public class DelCommand extends GeneralCommand {
     public void execute() {
         switch (po.getName()) {
             case DEL_TITLE:
-                // todo
+                bookmark.deleteDirectory(po.getArgs()[0]);
                 break;
             case DEL_BOOKMARK:
-                // todo
-
+                bookmark.deleteItem(po.getArgs()[0]);
                 break;
             default:
                 break;

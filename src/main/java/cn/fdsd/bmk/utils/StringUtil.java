@@ -20,4 +20,11 @@ public class StringUtil {
     public static Boolean isBmkFile(String filePath) {
         return !isEmpty(filePath) && filePath.endsWith(".bmk");
     }
+
+    public static String removeQuotationMarks(String text) {
+        if (Boolean.TRUE.equals(isEmpty(text))) {
+            return "";
+        }
+        return text.replace("\"", "");
+    }
 }

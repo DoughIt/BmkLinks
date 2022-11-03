@@ -14,6 +14,11 @@ public class OpenCommand extends GeneralCommand {
             case EDIT:
                 bookmark.lsTree();
                 break;
+            case REDO:
+                bookmark.accessItem(po.getArgs());
+                break;
+            case READ_TITLE:
+                bookmark.accessDirectory(po.getArgs());
             default:
                 break;
         }

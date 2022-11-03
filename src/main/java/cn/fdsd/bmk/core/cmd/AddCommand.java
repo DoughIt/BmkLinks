@@ -1,6 +1,7 @@
 package cn.fdsd.bmk.core.cmd;
 
 
+import cn.fdsd.bmk.utils.ParserUtil;
 import lombok.AllArgsConstructor;
 
 /**
@@ -12,12 +13,12 @@ public class AddCommand extends GeneralCommand {
     @Override
     public void execute() {
         switch (po.getName()) {
+            // todo 暂时不批量处理 args
             case ADD_TITLE:
-                // todo
+                bookmark.addDirectoryAt(ParserUtil.parseToTitle(po.getArgs()[0]), po.getAtOption());
                 break;
             case ADD_BOOKMARK:
-                // todo
-
+                bookmark.addItemAt(ParserUtil.parseToLink(po.getArgs()[0]), po.getAtOption());
                 break;
             default:
                 break;

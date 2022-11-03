@@ -28,6 +28,20 @@ public class Link extends Node {
         return url;
     }
 
+    /**
+     * name 字段用于查询
+     * @return
+     */
+    @Override
+    public String getName() {
+        return text;
+    }
+
+    @Override
+    protected boolean keyEquals(Node a, Node b) {
+        return a instanceof Link && b instanceof Link && ((Link) a).getText().equals(((Link) b).getText());
+    }
+
     @Override
     public <N extends Node> void accept(NodeAdaptedVisitor<N> nVisitor) {
         nVisitor.visit(this);

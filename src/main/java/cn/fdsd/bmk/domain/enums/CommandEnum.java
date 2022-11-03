@@ -16,14 +16,15 @@ public enum CommandEnum {
     OPEN("open", null, "从文件打开书签栏", new String[]{"open './data.bmk'"}, true),     // 从文件打开书签
     BOOKMARK("bookmark", OPEN),    // 启动程序
     EDIT("edit", OPEN, "编辑书签栏", new String[]{"edit './data.bmk'"}, true),     // 编辑指定书签
-    READ("read", OPEN, "访问书签", new String[]{"read './data.bmk'"}, true),     // 访问指定书签
+    READ("read", OPEN, "访问书签", new String[]{"read 'elearning'"}, true),     // 访问指定书签
+    READ_TITLE("read-title", OPEN, "访问文件夹，选中该文件夹", new String[]{"read-title '课程'"}, true),     // 访问指定书签
 
     SAVE("save", null, "保存书签栏", new String[]{"save ['./data.bmk']"}, true),     // 持久化存储到 bmk 文件
     UNDO("undo", null, "撤回", null, true),     // undo 功能
     REDO("redo", null, "重做", null, true),     // redo 功能
     SHOW("show", null),
     SHOW_TREE("show-tree", SHOW, "可视化当前编辑内容", null, true),   // 可视化当前编辑内容
-    LS_TREE("ls-tree", SHOW, "可视化当前目录结构", null, true);   // 可视化当前目录结构
+    LS_TREE("ls-tree", SHOW, "可视化当前选中的文件夹目录结构", null, true);   // 可视化当前目录结构
 
     private final String name;
     private final CommandEnum parent;

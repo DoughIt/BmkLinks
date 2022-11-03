@@ -13,7 +13,8 @@ public enum CommandErrorCode implements ErrorCode {
     PARSE_FAILED(1003, "解析失败"),
     CANNOT_UNDO(1004, "不支持 undo 操作"),
     CANNOT_REDO(1005, "不支持 redo 操作"),
-    NOT_SUPPORT(1006, "暂不支持该操作");
+    NOT_SUPPORT(1006, "暂不支持该操作"),
+    LOST(1007, "缺少参数"),;
 
     private long code;
     private String message;

@@ -6,6 +6,8 @@ import cn.fdsd.bmk.domain.enums.RenderEnum;
 import cn.fdsd.bmk.utils.StringUtil;
 import lombok.*;
 
+import java.util.List;
+
 /**
  * h1, h2, h3, h4, h5等标题
  * fullContent = # 标题
@@ -28,6 +30,20 @@ public class Title extends Node {
             return StringUtil.repeatStr("#", getLevel()) + " " + text;
         }
         return text;
+    }
+
+    /**
+     * name 字段用于查询
+     * @return
+     */
+    @Override
+    public String getName() {
+        return text;
+    }
+
+    @Override
+    protected boolean keyEquals(Node a, Node b) {
+        return a instanceof Title && b instanceof Title && (((Title) a).getText().equals(((Title) b).getText()));
     }
 
     @Override

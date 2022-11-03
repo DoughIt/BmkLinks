@@ -7,6 +7,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * 节点基本信息
@@ -18,6 +21,8 @@ import java.io.Serializable;
 @EqualsAndHashCode
 public abstract class Node implements Visitable, Serializable {
     private static final long serialVersionUID = 1L;
+    private String uuid = UUID.randomUUID().toString();   // 唯一 uuid
+    private String name;            // 不是唯一的，用于查询一类节点
     private String fullContent;   // add 命令后的文字
     private Node parent = null;
     private Node firstChild = null; // 第一个直接子节点
@@ -49,6 +54,25 @@ public abstract class Node implements Visitable, Serializable {
     }
 
     /**
+     * 在当前节点（含）及下属节点下查找 name 节点
+     * 在 name 节点下插入子节点
+     *
+     * @param name
+     * @param nameType
+     * @param child
+     */
+    public void appendChildInNameNode(String name, Class<? extends Node> nameType, Node child) {
+        for (Node node : getChildren()) {
+            // 检查 uuid 是否相同，避免新插入节点的 name 与 name 相同时进入无限循环
+            if (node.getName() != null && node.getName().equals(name) &&
+                    nameType.isInstance(node) && !node.getUuid().equals(child.getUuid())) {
+                node.appendChild(child);
+            }
+        }
+    }
+
+
+    /**
      * 插入一个兄弟节点
      *
      * @param sibling
@@ -62,8 +86,35 @@ public abstract class Node implements Visitable, Serializable {
         sibling.prev = this;
         this.next = sibling;
         sibling.parent = this.parent;
-        if (sibling.next == null) {
+        if (sibling.next == null && sibling.parent != null) {
             sibling.parent.lastChild = sibling;
+        }
+    }
+
+    /**
+     * 在当前节点（含）及下属节点下查找 name 节点
+     * 在 name 节点后插入兄弟节点
+     *
+     * @param name
+     * @param nameType
+     * @param sibling
+     */
+    public void insertAfterInNameNode(String name, Class<? extends Node> nameType, Node sibling) {
+        for (Node node : getChildren()) {
+            // 检查 uuid 是否相同，避免新插入节点的 name 与 name 相同时进入无限循环
+            if (node.getName() != null && node.getName().equals(name) &&
+                    nameType.isInstance(node) && !node.getUuid().equals(sibling.getUuid())) {
+                node.insertAfter(sibling);
+            }
+        }
+    }
+
+    public void removeNameNodes(String name, Class<? extends Node> nameType) {
+        for (Node node : getChildren()) {
+            // 检查 uuid 是否相同，避免新插入节点的 name 与 name 相同时进入无限循环
+            if (node.getName() != null && node.getName().equals(name) && nameType.isInstance(node)) {
+                node.unlink();
+            }
         }
     }
 
@@ -114,5 +165,61 @@ public abstract class Node implements Visitable, Serializable {
     public String getRenderContent(RenderEnum renderEnum) {
         // 默认不处理
         return this.fullContent;
+    }
+
+    /**
+     * 判断两个节点相等的基准
+     *
+     * @param a
+     * @param b
+     * @return
+     */
+    protected abstract boolean keyEquals(Node a, Node b);
+
+
+    public List<Node> getNodesByKey() {
+        return new ArrayList<>();
+    }
+
+    /**
+     * 统计节点上有多少指定类型的祖先节点
+     *
+     * @param nodeClass
+     * @return
+     */
+    public int countAncestorsOfType(Class<? extends Node> nodeClass) {
+        Node pNode = getParent();
+        int count = 0;
+        while (pNode != null) {
+            if (nodeClass.isInstance(pNode)) {
+                count++;
+            }
+            pNode = pNode.getParent();
+        }
+        return count;
+    }
+
+    /**
+     * 统计节点下有多少指定类型的子节点
+     *
+     * @param nodeClass
+     * @return
+     */
+    public int countChildrenOfType(Class<? extends Node> nodeClass) {
+        int count = 0;
+        for (Node child : getChildren()) {
+            if (nodeClass.isInstance(child)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public Iterable<Node> getChildren() {
+
+        if (firstChild == null) {
+            return NodeIterable.EMPTY;
+        }
+        return new NodeIterable(firstChild, lastChild);
     }
 }

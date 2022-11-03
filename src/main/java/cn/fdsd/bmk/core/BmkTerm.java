@@ -4,7 +4,6 @@ import cn.fdsd.bmk.core.cmd.factory.CommandFactory;
 import cn.fdsd.bmk.core.cmd.factory.CommandInvoker;
 import cn.fdsd.bmk.domain.enums.CommandEnum;
 import cn.fdsd.bmk.domain.po.Bookmark;
-import cn.fdsd.bmk.domain.po.CommandPo;
 import cn.fdsd.bmk.exception.CommandException;
 import cn.fdsd.bmk.utils.HintScanner;
 import cn.fdsd.bmk.utils.ParserUtil;
@@ -27,8 +26,7 @@ public class BmkTerm {
         try (HintScanner scanner = new HintScanner(System.in)) {
             String cmd;
             while ((cmd = scanner.nextLine(HINT, false)) != null) {
-//                invoker.execute(bookmark, ParserUtil.parseCommand(cmd));
-                invoker.execute(bookmark, CommandPo.builder().name(CommandEnum.LS_TREE).build());
+                invoker.execute(bookmark, ParserUtil.parseCommand(cmd));
             }
         } catch (CommandException ex) {
             System.out.printf("%s", ex.getErrorCode().getMessage());
