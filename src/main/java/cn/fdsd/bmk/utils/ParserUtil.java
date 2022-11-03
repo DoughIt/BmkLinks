@@ -25,6 +25,7 @@ import java.util.regex.Pattern;
 public class ParserUtil {
     /**
      * 解析 bmk 文件，存入内存
+     *
      * @param bmkFile
      * @return
      */
@@ -35,9 +36,10 @@ public class ParserUtil {
         File file = new File(bmkFile);
         if (!file.exists()) {
             try {
-                file.createNewFile();
+                boolean res = file.createNewFile();
+                OutputUtil.log(res ? "创建文件成功！" : "创建文件失败！");
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new CommandException(CommandErrorCode.PARSE_FAILED);
             }
         }
         Node root = null;
@@ -84,6 +86,7 @@ public class ParserUtil {
 
     /**
      * 正则匹配 markdown 的标题语法
+     *
      * @param line
      * @return
      */
@@ -93,6 +96,7 @@ public class ParserUtil {
 
     /**
      * 正则匹配 markdown 的链接语法
+     *
      * @param line
      * @return
      */
@@ -102,6 +106,7 @@ public class ParserUtil {
 
     /**
      * 解析命令行输入命令
+     *
      * @param line
      * @return
      */
@@ -134,6 +139,7 @@ public class ParserUtil {
 
     /**
      * 解析 title
+     *
      * @param text
      * @return
      */
@@ -146,6 +152,7 @@ public class ParserUtil {
 
     /**
      * 解析 link
+     *
      * @param text
      * @return
      */
