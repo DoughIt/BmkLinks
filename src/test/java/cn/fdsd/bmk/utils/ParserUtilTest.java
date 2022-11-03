@@ -13,12 +13,12 @@ class ParserUtilTest {
     @Test
     void testParseBmk() {
         String testFile = RESOURCE_PATH + "test.bmk";
-        String expected = "└── 复旦\n" +
-                "   ├── 复旦官网\n" +
-                "   │  └──http://fudan.edu.cn\n" +
-                "   └── 复旦系统\n" +
-                "      ├──http://ehall.fudan.edu.cn\n" +
-                "      └──http://elearning.fudan.edu.cn";
+        String expected = "└──复旦\n" +
+                "   ├──复旦官网\n" +
+                "   │  └──官网链接 http://fudan.edu.cn (已访问 0 次)\n" +
+                "   └──复旦系统\n" +
+                "      ├──ehall http://ehall.fudan.edu.cn (已访问 0 次)\n" +
+                "      └──elearning http://elearning.fudan.edu.cn (已访问 0 次)";
         Node root = ParserUtil.parseBmk(testFile);
 
         assertNotNull(root);
