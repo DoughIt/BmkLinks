@@ -8,6 +8,7 @@ import cn.fdsd.bmk.ast.visitor.PrinterTreeVisitor;
 import cn.fdsd.bmk.domain.cont.Constants;
 import cn.fdsd.bmk.exception.CommandErrorCode;
 import cn.fdsd.bmk.exception.CommandException;
+import cn.fdsd.bmk.utils.OutputUtil;
 import cn.fdsd.bmk.utils.ParserUtil;
 import cn.fdsd.bmk.utils.StringUtil;
 import lombok.EqualsAndHashCode;
@@ -34,15 +35,15 @@ public class Bookmark {
     }
 
     public void init() {
-        System.out.printf("开始初始化：%s\n", path);
+        OutputUtil.print("开始初始化：%s\n", path);
         this.root = ParserUtil.parseBmk(path);
-        System.out.println("初始化完成");
+        OutputUtil.println("初始化完成");
     }
 
     public void open(String path) {
         if (Boolean.TRUE.equals(StringUtil.isEmpty(path)) || Boolean.FALSE.equals(StringUtil.isBmkFile(path))) {
             this.path = Constants.RESOURCE_PATH + "data.bmk";
-            System.out.printf("未指定路径或指定非 bmk 文件，默认存储至：%s\n", this.path);
+            OutputUtil.print("未指定路径或指定非 bmk 文件，默认存储至：%s\n", this.path);
         } else {
             this.path = path;
         }
@@ -53,7 +54,7 @@ public class Bookmark {
         if (this.root != null) {
             StringBuilder out = new StringBuilder();
             this.root.walk(new PrinterTreeVisitor<>(out));
-            System.out.println(out);
+            OutputUtil.println(out.toString());
         }
     }
 

@@ -7,6 +7,7 @@ import cn.fdsd.bmk.domain.enums.CommandEnum;
 import cn.fdsd.bmk.domain.po.Bookmark;
 import cn.fdsd.bmk.exception.CommandException;
 import cn.fdsd.bmk.utils.HintScanner;
+import cn.fdsd.bmk.utils.OutputUtil;
 import cn.fdsd.bmk.utils.ParserUtil;
 import cn.fdsd.bmk.utils.StringUtil;
 
@@ -31,7 +32,7 @@ public class BmkTerm {
                     invoker.execute(bookmark, ParserUtil.parseCommand(cmd));
                 } catch (CommandException ex) {
                     // 继续监听
-                    System.out.printf("%s\n", ex.getErrorCode().getMessage());
+                    OutputUtil.log("%s\n",ex.getErrorCode().getMessage());
                 }
             }
         } catch (IOException e) {
@@ -40,11 +41,11 @@ public class BmkTerm {
     }
 
     private static void outputHelp() {
-        System.out.println(StringUtil.repeatStr("- ", 32));
-        System.out.printf("在提示符（%s）后输入命令，按回车键执行命令！", Constants.HINT);
+        OutputUtil.println(StringUtil.repeatStr("- ", 32));
+        OutputUtil.print("在提示符（%s）后输入命令，按回车键执行命令！", Constants.HINT);
         StringBuilder commandHelper = new StringBuilder();
         CommandEnum.exportHelp(commandHelper);
-        System.out.println(commandHelper);
-        System.out.println(StringUtil.repeatStr("- ", 32));
+        OutputUtil.println(commandHelper.toString());
+        OutputUtil.println(StringUtil.repeatStr("- ", 32));
     }
 }

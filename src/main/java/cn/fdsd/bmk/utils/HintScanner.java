@@ -21,7 +21,7 @@ public class HintScanner implements Iterator<String>, Closeable {
     }
 
     public String nextLine(String hint, boolean comma) {
-        System.out.printf("%s %s", hint, comma ? ": " : " ");
+        OutputUtil.print("%s %s", hint, comma ? ": " : " ");
         return this.scanner.nextLine();
     }
 
