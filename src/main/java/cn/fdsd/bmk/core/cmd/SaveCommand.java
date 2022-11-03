@@ -8,9 +8,10 @@ import cn.fdsd.bmk.domain.enums.CommandEnum;
  */
 public class SaveCommand extends GeneralCommand {
     @Override
-    public void execute() {
+    public int execute() {
         if (po.getName().equals(CommandEnum.SAVE)) {
-            bookmark.save();
+            return bookmark.save();
         }
+        return -1;
     }
 }

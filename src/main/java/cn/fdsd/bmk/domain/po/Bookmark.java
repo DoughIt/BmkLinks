@@ -17,6 +17,8 @@ import lombok.Setter;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Jerry Zhang
@@ -34,36 +36,53 @@ public class Bookmark {
         this.root = null;
     }
 
-    public void init() {
+    public int init() {
         OutputUtil.print("开始初始化：%s\n", path);
         this.root = ParserUtil.parseBmk(path);
         OutputUtil.println("初始化完成");
+        return 1;
     }
 
-    public void open(String path) {
+    public int open(String path) {
+        if (Boolean.FALSE.equals(StringUtil.isEmpty(this.path)) && this.root!=null) {
+            OutputUtil.print("工作区存在内容，自动保存至：%s\n", this.path);
+            save();
+            OutputUtil.println("已保存，即将打开新文件");
+        }
         if (Boolean.TRUE.equals(StringUtil.isEmpty(path)) || Boolean.FALSE.equals(StringUtil.isBmkFile(path))) {
             this.path = Constants.RESOURCE_PATH + "data.bmk";
             OutputUtil.print("未指定路径或指定非 bmk 文件，默认存储至：%s\n", this.path);
         } else {
             this.path = path;
         }
-        init();
+        return init();
+    }
+    public int showTree() {
+        if (this.root != null) {
+            StringBuilder out = new StringBuilder();
+            this.root.walk(new OutputMdVisitor<>(out));
+            OutputUtil.println(out.toString());
+            return 1;
+        }
+        throw new CommandException(CommandErrorCode.EMPTY);
     }
 
-    public void lsTree() {
+    public int lsTree() {
         if (this.root != null) {
             StringBuilder out = new StringBuilder();
             this.root.walk(new PrinterTreeVisitor<>(out));
             OutputUtil.println(out.toString());
+            return 1;
         }
+        throw new CommandException(CommandErrorCode.EMPTY);
     }
 
-    public void save(String path) {
+    public int save(String path) {
         this.path = path;
-        save();
+        return save();
     }
 
-    public void save() {
+    public int save() {
         if (this.root == null) {
             throw new CommandException(CommandErrorCode.EMPTY);
         }
@@ -75,9 +94,10 @@ public class Bookmark {
         } catch (FileNotFoundException e) {
             throw new CommandException(CommandErrorCode.SAVE_FAILED);
         }
+        return 1;
     }
 
-    public void addDirectoryAt(Title title, String at) {
+    public int addDirectoryAt(Title title, String at) {
         if (this.root == null) {
             title.setLevel(1);
             this.root = title;
@@ -95,9 +115,10 @@ public class Bookmark {
                 this.root.insertAfter(title);
             }
         }
+        return 1;
     }
 
-    public void addItemAt(Link link, String at) {
+    public int addItemAt(Link link, String at) {
         if (this.root == null) {
             this.root = link;
         } else {
@@ -114,18 +135,46 @@ public class Bookmark {
                 this.root.appendChild(link);
             }
         }
+        return 1;
     }
 
-
-    public void deleteDirectory(String name) {
-        this.root.removeNameNodes(StringUtil.removeQuotationMarks(name), Title.class);
+    public int deleteNodesByUuid(List<String> uuids) {
+        if (uuids == null || uuids.isEmpty()) {
+            return -1;
+        }
+        Node parent = this.root;
+        while (parent != null) {
+            parent.removeNodesByUuids(uuids);
+            parent = parent.getNext();
+        }
+        return 1;
     }
 
-    public void deleteItem(String name) {
-        this.root.removeNameNodes(StringUtil.removeQuotationMarks(name), Link.class);
+    public int deleteDirectoryAt(String name, List<Node> deleteDirectories) {
+        if (Boolean.TRUE.equals(StringUtil.isEmpty(name))) {
+            throw new CommandException(CommandErrorCode.LOST);
+        }
+        Node parent = this.root;
+        while (parent != null) {
+            parent.removeNameNodes(StringUtil.removeQuotationMarks(name), Title.class, deleteDirectories);
+            parent = parent.getNext();
+        }
+        return 1;
     }
 
-    public void accessItem(String[] args) {
+    public int deleteItemAt(String name, List<Node> deleteItems) {
+        if (Boolean.TRUE.equals(StringUtil.isEmpty(name))) {
+            throw new CommandException(CommandErrorCode.LOST);
+        }
+        Node parent = this.root;
+        while (parent != null) {
+            parent.removeNameNodes(StringUtil.removeQuotationMarks(name), Link.class, deleteItems);
+            parent = parent.getNext();
+        }
+        return 1;
+    }
+
+    public int accessItem(String[] args) {
         if (args == null) {
             throw new CommandException(CommandErrorCode.LOST);
         }
@@ -136,9 +185,10 @@ public class Bookmark {
                 parent = parent.getNext();
             }
         }
+        return 1;
     }
 
-    public void accessDirectory(String[] args) {
+    public int accessDirectory(String[] args) {
         if (args == null) {
             throw new CommandException(CommandErrorCode.LOST);
         }
@@ -149,5 +199,6 @@ public class Bookmark {
                 parent = parent.getNext();
             }
         }
+        return 1;
     }
 }

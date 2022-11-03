@@ -6,20 +6,17 @@ package cn.fdsd.bmk.core.cmd;
  */
 public class OpenCommand extends GeneralCommand {
     @Override
-    public void execute() {
+    public int execute() {
         switch (po.getName()) {
             case OPEN:
             case EDIT:
-                bookmark.open(po.getArgs() != null ? po.getArgs()[0] : null);
-                break;
+                return bookmark.open(po.getArgs() != null ? po.getArgs()[0] : null);
             case READ:
-                bookmark.accessItem(po.getArgs());
-                break;
+                return bookmark.accessItem(po.getArgs());
             case READ_TITLE:
-                bookmark.accessDirectory(po.getArgs());
-                break;
+                return bookmark.accessDirectory(po.getArgs());
             default:
-                break;
+                return -1;
         }
     }
 }

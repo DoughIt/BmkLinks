@@ -111,12 +111,30 @@ public abstract class Node implements Visitable, Serializable {
         }
     }
 
-    public void removeNameNodes(String name, Class<? extends Node> nameType) {
+    public void removeNameNodes(String name, Class<? extends Node> nameType, List<Node> deleteNodes) {
         if (getName() != null && getName().equals(name) && nameType.isInstance(this)) {
+            // 保留 parent 信息，以便恢复
+            Node pNode = this.parent;
             unlink();
+            this.parent = pNode;
+            deleteNodes.add(this);
         }
         for (Node node : getChildren()) {
-            node.removeNameNodes(name, nameType);
+            node.removeNameNodes(name, nameType, deleteNodes);
+        }
+    }
+
+    public void removeNodesByUuids(List<String> uuids) {
+        for (String id : uuids) {
+            if (getUuid() != null && getUuid().equals(id)) {
+                // 保留 parent 信息，以便恢复
+                Node pNode = this.parent;
+                unlink();
+                this.parent = pNode;
+            }
+        }
+        for (Node node : getChildren()) {
+            node.removeNodesByUuids(uuids);
         }
     }
 

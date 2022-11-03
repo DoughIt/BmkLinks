@@ -5,6 +5,9 @@ import cn.fdsd.bmk.core.cmd.ext.UndoableAddCommand;
 import cn.fdsd.bmk.core.cmd.ext.UndoableDelCommand;
 import cn.fdsd.bmk.domain.enums.CommandEnum;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Jerry Zhang
  * create: 2022-11-01 20:04
@@ -32,9 +35,12 @@ public class CommandFactory {
             case SHOW:
             case SHOW_TREE:
             case LS_TREE:
+            case HISTORY:
                 return new ShowCommand();
             case SAVE:
                 return new SaveCommand();
+            case EXIT:
+               return new ExitCommand();
         }
         return null;
     }

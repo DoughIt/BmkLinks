@@ -14,7 +14,8 @@ public enum CommandErrorCode implements ErrorCode {
     CANNOT_UNDO(1004, "不支持 undo 操作"),
     CANNOT_REDO(1005, "不支持 redo 操作"),
     NOT_SUPPORT(1006, "暂不支持该操作"),
-    LOST(1007, "缺少参数"),;
+    LOST(1007, "缺少参数"),
+    EMPTY_HISTORY(1008, "无操作历史，不可 undo / redo"),;
 
     private long code;
     private String message;

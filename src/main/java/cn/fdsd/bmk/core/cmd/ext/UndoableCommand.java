@@ -1,6 +1,5 @@
 package cn.fdsd.bmk.core.cmd.ext;
 
-import cn.fdsd.bmk.core.cmd.Command;
 import cn.fdsd.bmk.core.cmd.GeneralCommand;
 import cn.fdsd.bmk.domain.po.Bookmark;
 import cn.fdsd.bmk.domain.po.CommandPo;
@@ -47,39 +46,41 @@ public abstract class UndoableCommand extends GeneralCommand implements Undoable
         return !canUndo;
     }
 
-    protected void command() {
-        command.execute();
+    protected int command() {
+        return command.execute();
     }
 
     /**
      * 恢复
      */
-    protected abstract void restore();
+    protected abstract int restore();
 
-    public void execute() {
-        command();
-        setCanUndo(true);
+    public int execute() {
+        int res = command();
+        setCanUndo(res > 0);
+        return res;
     }
 
-    protected void unExecute() {
-        restore();
-        setCanUndo(false);
+    protected int unExecute() {
+        int res = restore();
+        setCanUndo(res < 0);
+        return res;
     }
 
-    public void undo() {
+    public int undo() {
         if (!canUndo()) {
             throw new CommandException(CommandErrorCode.CANNOT_UNDO);
         }
-        unExecute();
+       return unExecute();
     }
 
     /**
      * 上一步为 undo 才可以 redo
      */
-    public void redo() {
+    public int redo() {
         if (!canRedo()) {
             throw new CommandException(CommandErrorCode.CANNOT_REDO);
         }
-        execute();
+        return execute();
     }
 }

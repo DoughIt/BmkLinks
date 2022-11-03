@@ -24,7 +24,9 @@ public enum CommandEnum {
     REDO("redo", null, "重做", null, true),     // redo 功能
     SHOW("show", null),
     SHOW_TREE("show-tree", SHOW, "可视化当前编辑内容", null, true),   // 可视化当前编辑内容
-    LS_TREE("ls-tree", SHOW, "可视化当前选中的文件夹目录结构", null, true);   // 可视化当前目录结构
+    LS_TREE("ls-tree", SHOW, "可视化当前选中的文件夹目录结构", null, true),   // 可视化当前目录结构
+    HISTORY("history", SHOW, "操作历史", null, true),   // 可视化当前目录结构
+    EXIT("exit", null, "退出", null, true);   // 退出
 
     private final String name;
     private final CommandEnum parent;

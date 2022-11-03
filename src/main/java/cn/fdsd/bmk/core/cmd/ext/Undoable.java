@@ -8,9 +8,9 @@ package cn.fdsd.bmk.core.cmd.ext;
  */
 public interface Undoable {
 
-    void undo();
+    int undo();
 
-    void redo();
+    int redo();
 
     boolean canUndo();
 
