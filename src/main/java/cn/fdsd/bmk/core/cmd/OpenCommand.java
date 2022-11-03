@@ -9,16 +9,15 @@ public class OpenCommand extends GeneralCommand {
     public void execute() {
         switch (po.getName()) {
             case OPEN:
-                bookmark.init();
-                break;
             case EDIT:
-                bookmark.lsTree();
+                bookmark.open(po.getArgs() != null ? po.getArgs()[0] : null);
                 break;
             case REDO:
                 bookmark.accessItem(po.getArgs());
                 break;
             case READ_TITLE:
                 bookmark.accessDirectory(po.getArgs());
+                break;
             default:
                 break;
         }

@@ -11,6 +11,7 @@ import cn.fdsd.bmk.exception.CommandErrorCode;
 import cn.fdsd.bmk.exception.CommandException;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.regex.Matcher;
@@ -30,6 +31,14 @@ public class ParserUtil {
     public static Node parseBmk(String bmkFile) {
         if (!Boolean.TRUE.equals(StringUtil.isBmkFile(bmkFile))) {
             throw new CommandException(CommandErrorCode.NOT_BMK);
+        }
+        File file = new File(bmkFile);
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
         Node root = null;
         try (BufferedReader br = new BufferedReader(new FileReader(bmkFile));) {

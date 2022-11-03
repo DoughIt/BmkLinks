@@ -5,6 +5,7 @@ import cn.fdsd.bmk.ast.node.Link;
 import cn.fdsd.bmk.ast.node.Title;
 import cn.fdsd.bmk.ast.visitor.OutputMdVisitor;
 import cn.fdsd.bmk.ast.visitor.PrinterTreeVisitor;
+import cn.fdsd.bmk.domain.cont.Constants;
 import cn.fdsd.bmk.exception.CommandErrorCode;
 import cn.fdsd.bmk.exception.CommandException;
 import cn.fdsd.bmk.utils.ParserUtil;
@@ -33,8 +34,19 @@ public class Bookmark {
     }
 
     public void init() {
-        System.out.println("开始导入……");
+        System.out.printf("开始初始化：%s\n", path);
         this.root = ParserUtil.parseBmk(path);
+        System.out.println("初始化完成");
+    }
+
+    public void open(String path) {
+        if (Boolean.TRUE.equals(StringUtil.isEmpty(path)) || Boolean.FALSE.equals(StringUtil.isBmkFile(path))) {
+            this.path = Constants.RESOURCE_PATH + "data.bmk";
+            System.out.printf("未指定路径或指定非 bmk 文件，默认存储至：%s\n", this.path);
+        } else {
+            this.path = path;
+        }
+        init();
     }
 
     public void lsTree() {
@@ -64,32 +76,41 @@ public class Bookmark {
     }
 
     public void addDirectoryAt(Title title, String at) {
-        at = StringUtil.removeQuotationMarks(at);
-        if (!Boolean.TRUE.equals(StringUtil.isEmpty(at))) {
-            // 放在 at 级目录下
-            Node parent = this.root;
-            while (parent != null) {
-                parent.appendChildInNameNode(at, Title.class, title);
-                parent = parent.getNext();
-            }
+        if (this.root == null) {
+            title.setLevel(1);
+            this.root = title;
         } else {
-            // title 默认放在 root 目录同级
-            this.root.insertAfter(title);
+            at = StringUtil.removeQuotationMarks(at);
+            if (!Boolean.TRUE.equals(StringUtil.isEmpty(at))) {
+                // 放在 at 级目录下
+                Node parent = this.root;
+                while (parent != null) {
+                    parent.appendChildInNameNode(at, Title.class, title);
+                    parent = parent.getNext();
+                }
+            } else {
+                // title 默认放在 root 目录同级
+                this.root.insertAfter(title);
+            }
         }
     }
 
     public void addItemAt(Link link, String at) {
-        at = StringUtil.removeQuotationMarks(at);
-        if (!Boolean.TRUE.equals(StringUtil.isEmpty(at))) {
-            // 放在 at 级目录下
-            Node parent = this.root;
-            while (parent != null) {
-                parent.appendChildInNameNode(at, Title.class, link);
-                parent = parent.getNext();
-            }
+        if (this.root == null) {
+            this.root = link;
         } else {
-            // link 默认放在 root 目录下
-            this.root.appendChild(link);
+            at = StringUtil.removeQuotationMarks(at);
+            if (!Boolean.TRUE.equals(StringUtil.isEmpty(at))) {
+                // 放在 at 级目录下
+                Node parent = this.root;
+                while (parent != null) {
+                    parent.appendChildInNameNode(at, Title.class, link);
+                    parent = parent.getNext();
+                }
+            } else {
+                // link 默认放在 root 目录下
+                this.root.appendChild(link);
+            }
         }
     }
 
