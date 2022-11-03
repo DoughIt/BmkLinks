@@ -25,11 +25,12 @@ public class Link extends Node {
         if (renderEnum == RenderEnum.MARKDOWN) {
             return "[" + text + "](" + url + ")";
         }
-        return url;
+        return text + " " + url + " (已访问 " + getAccesses() + " 次)";
     }
 
     /**
      * name 字段用于查询
+     *
      * @return
      */
     @Override

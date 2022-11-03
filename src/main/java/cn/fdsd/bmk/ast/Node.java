@@ -62,16 +62,13 @@ public abstract class Node implements Visitable, Serializable {
      * @param child
      */
     public void appendChildInNameNode(String name, Class<? extends Node> nameType, Node child) {
+        // 检查 uuid 是否相同，避免新插入节点的 name 与 name 相同时进入无限循环
         if (getName() != null && getName().equals(name) &&
                 nameType.isInstance(this) && !getUuid().equals(child.getUuid())) {
             appendChild(child);
         }
         for (Node node : getChildren()) {
-            // 检查 uuid 是否相同，避免新插入节点的 name 与 name 相同时进入无限循环
-            if (node.getName() != null && node.getName().equals(name) &&
-                    nameType.isInstance(node) && !node.getUuid().equals(child.getUuid())) {
-                node.appendChild(child);
-            }
+            node.appendChildInNameNode(name, nameType, child);
         }
     }
 
@@ -104,25 +101,22 @@ public abstract class Node implements Visitable, Serializable {
      * @param sibling
      */
     public void insertAfterInNameNode(String name, Class<? extends Node> nameType, Node sibling) {
+        // 检查 uuid 是否相同，避免新插入节点的 name 与 name 相同时进入无限循环
         if (getName() != null && getName().equals(name) &&
                 nameType.isInstance(this) && !getUuid().equals(sibling.getUuid())) {
             insertAfter(sibling);
         }
         for (Node node : getChildren()) {
-            // 检查 uuid 是否相同，避免新插入节点的 name 与 name 相同时进入无限循环
-            if (node.getName() != null && node.getName().equals(name) &&
-                    nameType.isInstance(node) && !node.getUuid().equals(sibling.getUuid())) {
-                node.insertAfter(sibling);
-            }
+            node.insertAfterInNameNode(name, nameType, sibling);
         }
     }
 
     public void removeNameNodes(String name, Class<? extends Node> nameType) {
+        if (getName() != null && getName().equals(name) && nameType.isInstance(this)) {
+            unlink();
+        }
         for (Node node : getChildren()) {
-            // 检查 uuid 是否相同，避免新插入节点的 name 与 name 相同时进入无限循环
-            if (node.getName() != null && node.getName().equals(name) && nameType.isInstance(node)) {
-                node.unlink();
-            }
+            node.removeNameNodes(name, nameType);
         }
     }
 
@@ -165,6 +159,10 @@ public abstract class Node implements Visitable, Serializable {
         return this.next != null;
     }
 
+    public boolean hasChildren() {
+        return this.firstChild != null;
+    }
+
     /**
      * 获取渲染后的文本
      *
@@ -187,6 +185,36 @@ public abstract class Node implements Visitable, Serializable {
 
     public List<Node> getNodesByKey() {
         return new ArrayList<>();
+    }
+
+
+    /**
+     * 更新节点状态
+     *
+     * @param arg
+     * @param isAccess
+     * @param nameType
+     */
+    public void updateStatus(String arg, boolean isAccess, Class<? extends Node> nameType) {
+        if (getName() != null && getName().equals(arg) && nameType.isInstance(this)) {
+            if (isAccess) {
+                updateAccess();
+            } else {
+                updateSelected();
+            }
+        }
+        for (Node node : getChildren()) {
+            node.updateStatus(arg, isAccess, nameType);
+        }
+    }
+
+    private void updateAccess() {
+        this.accessed = true;
+        this.accesses++;
+    }
+
+    private void updateSelected() {
+        this.selected = !this.selected;
     }
 
     /**
@@ -230,4 +258,5 @@ public abstract class Node implements Visitable, Serializable {
         }
         return new NodeIterable(firstChild, lastChild);
     }
+
 }

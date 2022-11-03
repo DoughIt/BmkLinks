@@ -12,7 +12,7 @@ public class OpenCommand extends GeneralCommand {
             case EDIT:
                 bookmark.open(po.getArgs() != null ? po.getArgs()[0] : null);
                 break;
-            case REDO:
+            case READ:
                 bookmark.accessItem(po.getArgs());
                 break;
             case READ_TITLE:

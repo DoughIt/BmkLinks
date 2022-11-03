@@ -110,7 +110,7 @@ public class ParserUtil {
             throw new CommandException(CommandErrorCode.PARSE_FAILED);
         }
         // 获取 at 选项
-        Pattern atPattern = Pattern.compile("\\s*(at)\\s*");
+        Pattern atPattern = Pattern.compile("\\s+(at)\\s+");
         Matcher atMatcher = atPattern.matcher(line);
         String leftCmd = line;
         String atOption = null;

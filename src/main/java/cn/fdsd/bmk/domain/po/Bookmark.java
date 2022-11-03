@@ -71,6 +71,7 @@ public class Bookmark {
         this.root.walk(new OutputMdVisitor<>(out));
         try (PrintWriter pw = new PrintWriter(this.path)) {
             pw.write(out.toString());
+            pw.flush();
         } catch (FileNotFoundException e) {
             throw new CommandException(CommandErrorCode.SAVE_FAILED);
         }
@@ -128,8 +129,12 @@ public class Bookmark {
         if (args == null) {
             throw new CommandException(CommandErrorCode.LOST);
         }
-        for (int i = 0; i < args.length; i++) {
-
+        for (String arg : args) {
+            Node parent = this.root;
+            while (parent != null) {
+                parent.updateStatus(arg, true, Link.class);
+                parent = parent.getNext();
+            }
         }
     }
 
@@ -137,7 +142,12 @@ public class Bookmark {
         if (args == null) {
             throw new CommandException(CommandErrorCode.LOST);
         }
-
-
+        for (String arg : args) {
+            Node parent = this.root;
+            while (parent != null) {
+                parent.updateStatus(arg, true, Title.class);
+                parent = parent.getNext();
+            }
+        }
     }
 }

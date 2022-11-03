@@ -26,6 +26,8 @@ public class CommandFactory {
                 return undoable ? new UndoableDelCommand(new DelCommand()) : new DelCommand();
             case OPEN:
             case EDIT:
+            case READ:
+            case READ_TITLE:
                 return new OpenCommand();
             case SHOW:
             case SHOW_TREE:
