@@ -3,6 +3,7 @@ package cn.fdsd.bmk.core;
 import cn.fdsd.bmk.core.cmd.factory.CommandFactory;
 import cn.fdsd.bmk.core.cmd.factory.CommandInvoker;
 import cn.fdsd.bmk.domain.po.Bookmark;
+import cn.fdsd.bmk.exception.CommandException;
 import cn.fdsd.bmk.utils.OutputUtil;
 import cn.fdsd.bmk.utils.ParserUtil;
 import org.junit.jupiter.api.*;
@@ -16,6 +17,11 @@ class BmkTermTest {
     private static final String SRC_FILE = RESOURCE_PATH + "test.bmk";
     private static final String TEST_FILE = RESOURCE_PATH + "test1.bmk";
     private static final String LS_TREE = "ls-tree";
+    private static final String SHOW_TREE = "show-tree";
+    private static final String UNDO = "undo";
+    private static final String REDO = "redo";
+    private static final String SAVE = "save";
+    private static final String HISTORY = "history";
 
     private static final String HINT = "> ";
     private CommandInvoker invoker;
@@ -82,6 +88,85 @@ class BmkTermTest {
         invoker.execute(bookmark, ParserUtil.parseCommand(deleteTitle1));
         println(LS_TREE);
         invoker.execute(bookmark, ParserUtil.parseCommand(LS_TREE));
+    }
+
+    @Test
+    @DisplayName("测试 undo / redo 功能")
+    void testUndoRedo() {
+        // history、ls-tree、show-tree、help 等查看功能可以被跳过
+        // 先进行增删操作
+        testDel();
+        println(HISTORY);
+        invoker.execute(bookmark, ParserUtil.parseCommand(HISTORY));
+        println(UNDO);
+        invoker.execute(bookmark, ParserUtil.parseCommand(UNDO));
+        println(LS_TREE);
+        invoker.execute(bookmark, ParserUtil.parseCommand(LS_TREE));
+        println(UNDO);
+        invoker.execute(bookmark, ParserUtil.parseCommand(UNDO));
+        println(LS_TREE);
+        invoker.execute(bookmark, ParserUtil.parseCommand(LS_TREE));
+        println(REDO);
+        invoker.execute(bookmark, ParserUtil.parseCommand(REDO));
+        println(LS_TREE);
+        invoker.execute(bookmark, ParserUtil.parseCommand(LS_TREE));
+        println(HISTORY);
+        invoker.execute(bookmark, ParserUtil.parseCommand(HISTORY));
+    }
+
+    @Test
+    @DisplayName("测试不允许 undo / redo 的情况")
+    void testCannotUndoRedo() {
+        // history、ls-tree、show-tree、help 等查看功能可以被跳过
+        // save / open / edit 等操作不允许 undo / redo
+        // 先进行增删操作
+        testDel();
+        println(HISTORY);
+        invoker.execute(bookmark, ParserUtil.parseCommand(HISTORY));
+        println(SAVE);
+        invoker.execute(bookmark, ParserUtil.parseCommand(SAVE));
+        try {
+            println(UNDO);
+            invoker.execute(bookmark, ParserUtil.parseCommand(UNDO));
+        } catch (CommandException e) {
+            println(e.getErrorCode().getMessage());
+        }
+        String addBookmark1 = "add-bookmark ehall@ehall.fudan.edu.cn at 课程";
+        println(addBookmark1);
+        println(HISTORY);
+        invoker.execute(bookmark, ParserUtil.parseCommand(HISTORY));
+        invoker.execute(bookmark, ParserUtil.parseCommand(addBookmark1));
+        // 没有 undo 不能直接 redo
+        try {
+            println(REDO);
+            invoker.execute(bookmark, ParserUtil.parseCommand(REDO));
+        } catch (CommandException e) {
+            println(e.getErrorCode().getMessage());
+        }
+        println(HISTORY);
+    }
+
+    @Test
+    @DisplayName("测试其他基础功能功能")
+    void testGeneralCommands() {
+        // 先进行增删操作
+        testDel();
+        String readBookmark = "read elearning";
+        println(readBookmark);
+        println(readBookmark);
+        invoker.execute(bookmark, ParserUtil.parseCommand(readBookmark));
+        invoker.execute(bookmark, ParserUtil.parseCommand(readBookmark));
+        println(LS_TREE);
+        invoker.execute(bookmark, ParserUtil.parseCommand(LS_TREE));
+        println(SHOW_TREE);
+        invoker.execute(bookmark, ParserUtil.parseCommand(SHOW_TREE));
+        String open = "open " + SRC_FILE;
+        println(open);
+        invoker.execute(bookmark, ParserUtil.parseCommand(open));
+        println(SHOW_TREE);
+        invoker.execute(bookmark, ParserUtil.parseCommand(SHOW_TREE));
+        println(HISTORY);
+        invoker.execute(bookmark, ParserUtil.parseCommand(HISTORY));
     }
 
     private void println(String text) {

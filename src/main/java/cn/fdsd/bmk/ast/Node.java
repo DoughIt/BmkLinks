@@ -141,12 +141,12 @@ public abstract class Node implements Visitable, Serializable {
     public void unlink() {
         if (this.prev != null) {
             this.prev.next = this.next;
-        } else if (this.parent != null) {
+        } else if (this.parent != null && this.parent.firstChild == this) {
             this.parent.firstChild = this.next;
         }
         if (this.next != null) {
             this.next.prev = this.prev;
-        } else if (this.parent != null) {
+        } else if (this.parent != null && this.parent.lastChild == this) {
             this.parent.lastChild = this.prev;
         }
         this.parent = null;

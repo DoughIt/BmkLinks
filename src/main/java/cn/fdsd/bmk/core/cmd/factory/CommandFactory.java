@@ -33,13 +33,12 @@ public class CommandFactory {
             case SHOW_TREE:
             case LS_TREE:
             case HISTORY:
+            case HELP:
                 return new ShowCommand();
             case SAVE:
                 return new SaveCommand();
             case EXIT:
                return new ExitCommand();
-            case HELP:
-                return new HelperCommand();
         }
         return null;
     }
