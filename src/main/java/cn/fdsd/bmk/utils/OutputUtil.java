@@ -1,7 +1,6 @@
 package cn.fdsd.bmk.utils;
 
 /**
- *
  * @author Jerry Zhang
  * create: 2022-11-03 13:41
  */
@@ -12,6 +11,11 @@ public class OutputUtil {
 
     public static void print(String format, Object... args) {
         System.out.printf(format, args);
+    }
+
+    public static void printLink(String lines) {
+//        String[] lineArr = lines.split("\n");
+        System.out.printf(lines + "\n");
     }
 
     public static void println(String text) {

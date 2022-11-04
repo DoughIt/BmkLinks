@@ -22,9 +22,10 @@ public class StringUtil {
     }
 
     public static String removeQuotationMarks(String text) {
+        if (text == null) return null;
         if (Boolean.TRUE.equals(isEmpty(text))) {
             return "";
         }
-        return text.replace("\"", "");
+        return text.replace("\"", "").replace("'", "");
     }
 }

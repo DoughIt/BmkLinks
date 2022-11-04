@@ -121,7 +121,7 @@ public class ParserUtil {
         String atOption = null;
         if (atMatcher.find()) {
             leftCmd = line.substring(0, line.indexOf(" at "));
-            atOption = line.substring(line.indexOf(" at ") + 4).trim();
+            atOption = StringUtil.removeQuotationMarks(line.substring(line.indexOf(" at ") + 4).trim());
         }
         // 获取命令 + 参数
         Pattern pattern = Pattern.compile("(\\S*)(\\s+(\\S*))?");
@@ -131,7 +131,7 @@ public class ParserUtil {
             return CommandPo.builder()
                     .fullCmd(line)
                     .name(commandEnum)
-                    .args(matcher.groupCount() >= 3 ? new String[]{matcher.group(3)} : null)
+                    .args(matcher.groupCount() >= 3 ? new String[]{StringUtil.removeQuotationMarks(matcher.group(3))} : null)
                     .atOption(atOption).build();
         }
         return null;
