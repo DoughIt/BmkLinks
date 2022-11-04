@@ -23,9 +23,11 @@ public class UndoableAddCommand extends UndoableCommand {
             } else {
                 for (int i = nodeList.size() - 1; i >= 0; i--) {
                     if (nodeList.get(i) instanceof Title) {
-                        bookmark.addDirectoryAt((Title) nodeList.get(i), nodeList.get(i).getParent().getName());
+                        bookmark.addDirectoryAt((Title) nodeList.get(i),
+                                nodeList.get(i).getParent() == null ? null : nodeList.get(i).getParent().getName());
                     } else if (nodeList.get(i) instanceof Link) {
-                        bookmark.addItemAt((Link) nodeList.get(i), nodeList.get(i).getParent().getName());
+                        bookmark.addItemAt((Link) nodeList.get(i),
+                                nodeList.get(i).getParent() == null ? null : nodeList.get(i).getParent().getName());
                     }
                 }
             }
