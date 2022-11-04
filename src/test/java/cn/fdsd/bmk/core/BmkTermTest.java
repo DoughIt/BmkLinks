@@ -28,7 +28,7 @@ class BmkTermTest {
     private CommandInvoker invoker;
     private Bookmark bookmark;
 
-    @BeforeAll
+    @BeforeEach
     void init() {
         invoker = CommandFactory.createInvoker();
         bookmark = new Bookmark("test2.bmk");
@@ -62,6 +62,10 @@ class BmkTermTest {
         invoker.execute(bookmark, ParserUtil.parseCommand(addBookmark1));
         println(LS_TREE);
         invoker.execute(bookmark, ParserUtil.parseCommand(LS_TREE));
+        String expected = "└──课程\n" +
+                "   ├──软件开发\n" +
+                "   └──elearning elearning.fudan.edu.cn (已访问 0 次)";
+        Assertions.assertEquals(expected, bookmark.getTreeBuffer().toString().trim());
     }
 
     @Test
@@ -89,6 +93,9 @@ class BmkTermTest {
         invoker.execute(bookmark, ParserUtil.parseCommand(deleteTitle1));
         println(LS_TREE);
         invoker.execute(bookmark, ParserUtil.parseCommand(LS_TREE));
+        String expected = "└──课程\n" +
+                "   └──elearning elearning.fudan.edu.cn (已访问 0 次)";
+        Assertions.assertEquals(expected, bookmark.getTreeBuffer().toString().trim());
     }
 
     @Test
@@ -113,6 +120,10 @@ class BmkTermTest {
         invoker.execute(bookmark, ParserUtil.parseCommand(LS_TREE));
         println(HISTORY);
         invoker.execute(bookmark, ParserUtil.parseCommand(HISTORY));
+        String expected = "└──课程\n" +
+                "   ├──软件开发\n" +
+                "   └──elearning elearning.fudan.edu.cn (已访问 0 次)";
+        Assertions.assertEquals(expected, bookmark.getTreeBuffer().toString().trim());
     }
 
     @Test
@@ -126,12 +137,16 @@ class BmkTermTest {
         invoker.execute(bookmark, ParserUtil.parseCommand(HISTORY));
         println(SAVE);
         invoker.execute(bookmark, ParserUtil.parseCommand(SAVE));
+        boolean error;
         try {
             println(UNDO);
             invoker.execute(bookmark, ParserUtil.parseCommand(UNDO));
+            error = false;
         } catch (CommandException e) {
+            error = true;
             OutputUtil.println(e.getErrorCode().getMessage());
         }
+        Assertions.assertTrue(error);
         String addBookmark1 = "add-bookmark ehall@ehall.fudan.edu.cn at 课程";
         println(addBookmark1);
         println(HISTORY);
@@ -141,9 +156,12 @@ class BmkTermTest {
         try {
             println(REDO);
             invoker.execute(bookmark, ParserUtil.parseCommand(REDO));
+            error = false;
         } catch (CommandException e) {
+            error = true;
             OutputUtil.println(e.getErrorCode().getMessage());
         }
+        Assertions.assertTrue(error);
         println(HISTORY);
     }
 
@@ -176,6 +194,13 @@ class BmkTermTest {
         // 打印帮助文档
         println(HELP);
         invoker.execute(bookmark, ParserUtil.parseCommand(HELP));
+        String expected = "└──复旦\n" +
+                "   ├──复旦官网\n" +
+                "   │  └──官网链接 http://fudan.edu.cn (已访问 0 次)\n" +
+                "   └──复旦系统\n" +
+                "      ├──ehall http://ehall.fudan.edu.cn (已访问 0 次)\n" +
+                "      └──elearning http://elearning.fudan.edu.cn (已访问 0 次)";
+        Assertions.assertEquals(expected, bookmark.getTreeBuffer().toString().trim());
     }
 
     private void println(String text) {

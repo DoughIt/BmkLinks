@@ -46,6 +46,24 @@ public class Bookmark {
         return this.root == null;
     }
 
+    public StringBuilder getTreeBuffer() {
+        if (this.root != null) {
+            StringBuilder out = new StringBuilder();
+            this.root.walk(new PrinterTreeVisitor<>(out));
+            return out;
+        }
+        throw new CommandException(CommandErrorCode.EMPTY);
+    }
+
+    public StringBuilder getMdBuffer() {
+        if (this.root != null) {
+            StringBuilder out = new StringBuilder();
+            this.root.walk(new OutputMdVisitor<>(out));
+            return out;
+        }
+        throw new CommandException(CommandErrorCode.EMPTY);
+    }
+
     public int open(String path) {
         if (Boolean.FALSE.equals(StringUtil.isEmpty(this.path)) && this.root != null) {
             OutputUtil.print("工作区存在内容，自动保存至：%s\n", this.path);
@@ -62,23 +80,13 @@ public class Bookmark {
     }
 
     public int showTree() {
-        if (this.root != null) {
-            StringBuilder out = new StringBuilder();
-            this.root.walk(new OutputMdVisitor<>(out));
-            OutputUtil.println(out.toString());
-            return 1;
-        }
-        throw new CommandException(CommandErrorCode.EMPTY);
+        OutputUtil.println(getMdBuffer().toString());
+        return 1;
     }
 
     public int lsTree() {
-        if (this.root != null) {
-            StringBuilder out = new StringBuilder();
-            this.root.walk(new PrinterTreeVisitor<>(out));
-            OutputUtil.println(out.toString());
-            return 1;
-        }
-        throw new CommandException(CommandErrorCode.EMPTY);
+        OutputUtil.println(getTreeBuffer().toString());
+        return 0;
     }
 
     public int save(String path) {
