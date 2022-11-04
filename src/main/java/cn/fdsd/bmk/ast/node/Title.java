@@ -39,7 +39,7 @@ public class Title extends Node {
      */
     @Override
     public String getName() {
-        return text;
+        return this.text;
     }
 
     @Override

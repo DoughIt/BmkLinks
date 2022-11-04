@@ -42,8 +42,12 @@ public class Bookmark {
         return 1;
     }
 
+    public boolean isEmpty() {
+        return this.root == null;
+    }
+
     public int open(String path) {
-        if (Boolean.FALSE.equals(StringUtil.isEmpty(this.path)) && this.root!=null) {
+        if (Boolean.FALSE.equals(StringUtil.isEmpty(this.path)) && this.root != null) {
             OutputUtil.print("工作区存在内容，自动保存至：%s\n", this.path);
             save();
             OutputUtil.println("已保存，即将打开新文件");
@@ -56,6 +60,7 @@ public class Bookmark {
         }
         return init();
     }
+
     public int showTree() {
         if (this.root != null) {
             StringBuilder out = new StringBuilder();
@@ -144,6 +149,9 @@ public class Bookmark {
             parent.removeNodesByUuids(uuids);
             parent = parent.getNext();
         }
+        if (this.root != null && uuids.contains(this.root.getUuid())) {
+            this.root = this.root.getNext();
+        }
         return 1;
     }
 
@@ -154,8 +162,15 @@ public class Bookmark {
         Node parent = this.root;
         while (parent != null) {
             parent.removeNameNodes(name, Title.class, deleteDirectories);
+            for (Node node : deleteDirectories) {
+                if (node.getUuid().equals(this.root.getUuid())) {
+                    this.root = parent.getNext();
+                    break;
+                }
+            }
             parent = parent.getNext();
         }
+
         return 1;
     }
 
