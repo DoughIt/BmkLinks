@@ -17,7 +17,6 @@ import lombok.Setter;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -102,7 +101,6 @@ public class Bookmark {
             title.setLevel(1);
             this.root = title;
         } else {
-            at = StringUtil.removeQuotationMarks(at);
             if (!Boolean.TRUE.equals(StringUtil.isEmpty(at))) {
                 // 放在 at 级目录下
                 Node parent = this.root;
@@ -122,7 +120,6 @@ public class Bookmark {
         if (this.root == null) {
             this.root = link;
         } else {
-            at = StringUtil.removeQuotationMarks(at);
             if (!Boolean.TRUE.equals(StringUtil.isEmpty(at))) {
                 // 放在 at 级目录下
                 Node parent = this.root;
@@ -156,7 +153,7 @@ public class Bookmark {
         }
         Node parent = this.root;
         while (parent != null) {
-            parent.removeNameNodes(StringUtil.removeQuotationMarks(name), Title.class, deleteDirectories);
+            parent.removeNameNodes(name, Title.class, deleteDirectories);
             parent = parent.getNext();
         }
         return 1;
@@ -168,7 +165,7 @@ public class Bookmark {
         }
         Node parent = this.root;
         while (parent != null) {
-            parent.removeNameNodes(StringUtil.removeQuotationMarks(name), Link.class, deleteItems);
+            parent.removeNameNodes(name, Link.class, deleteItems);
             parent = parent.getNext();
         }
         return 1;
