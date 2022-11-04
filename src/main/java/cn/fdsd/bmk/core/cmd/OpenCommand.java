@@ -11,7 +11,7 @@ public class OpenCommand extends GeneralCommand {
             case OPEN:
             case EDIT:
                 return bookmark.open(po.getArgs() != null ? po.getArgs()[0] : null);
-            case READ:
+            case READ_BOOKMARK:
                 return bookmark.accessItem(po.getArgs());
             case READ_TITLE:
                 return bookmark.accessDirectory(po.getArgs());

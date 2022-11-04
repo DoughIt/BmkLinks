@@ -22,6 +22,7 @@ class BmkTermTest {
     private static final String REDO = "redo";
     private static final String SAVE = "save";
     private static final String HISTORY = "history";
+    private static final String HELP = "help";
 
     private static final String HINT = "> ";
     private CommandInvoker invoker;
@@ -129,7 +130,7 @@ class BmkTermTest {
             println(UNDO);
             invoker.execute(bookmark, ParserUtil.parseCommand(UNDO));
         } catch (CommandException e) {
-            println(e.getErrorCode().getMessage());
+            OutputUtil.println(e.getErrorCode().getMessage());
         }
         String addBookmark1 = "add-bookmark ehall@ehall.fudan.edu.cn at 课程";
         println(addBookmark1);
@@ -141,7 +142,7 @@ class BmkTermTest {
             println(REDO);
             invoker.execute(bookmark, ParserUtil.parseCommand(REDO));
         } catch (CommandException e) {
-            println(e.getErrorCode().getMessage());
+            OutputUtil.println(e.getErrorCode().getMessage());
         }
         println(HISTORY);
     }
@@ -151,22 +152,30 @@ class BmkTermTest {
     void testGeneralCommands() {
         // 先进行增删操作
         testDel();
-        String readBookmark = "read elearning";
+        // 访问书签
+        String readBookmark = "read-bookmark elearning";
         println(readBookmark);
         println(readBookmark);
         invoker.execute(bookmark, ParserUtil.parseCommand(readBookmark));
         invoker.execute(bookmark, ParserUtil.parseCommand(readBookmark));
+        // 可视化
         println(LS_TREE);
         invoker.execute(bookmark, ParserUtil.parseCommand(LS_TREE));
         println(SHOW_TREE);
         invoker.execute(bookmark, ParserUtil.parseCommand(SHOW_TREE));
+        // 打开新的书签栏
         String open = "open " + SRC_FILE;
         println(open);
         invoker.execute(bookmark, ParserUtil.parseCommand(open));
+        // 可视化
         println(SHOW_TREE);
         invoker.execute(bookmark, ParserUtil.parseCommand(SHOW_TREE));
+        // 展示命令执行历史（成功执行的命令），已经被 undo 命令不会计入
         println(HISTORY);
         invoker.execute(bookmark, ParserUtil.parseCommand(HISTORY));
+        // 打印帮助文档
+        println(HELP);
+        invoker.execute(bookmark, ParserUtil.parseCommand(HELP));
     }
 
     private void println(String text) {
