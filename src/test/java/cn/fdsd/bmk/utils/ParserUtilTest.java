@@ -49,8 +49,8 @@ class ParserUtilTest {
         assertEquals("add-bookmark", addBookmarkPo.getName().getName());
         assertNotNull(addBookmarkPo.getArgs());
         assertNotEquals(0, addBookmarkPo.getArgs().length);
-        assertEquals("'ehall'@'https://ehall.fudan.edu.cn'", addBookmarkPo.getArgs()[0]);
+        assertEquals("ehall@https://ehall.fudan.edu.cn", addBookmarkPo.getArgs()[0]);
         assertNotNull(addBookmarkPo.getAtOption());
-        assertEquals("'复旦系统'", addBookmarkPo.getAtOption());
+        assertEquals("复旦系统", addBookmarkPo.getAtOption());
     }
 }
